@@ -14,3 +14,14 @@ model User {
   senha    String
   telefone String
 }
+
+model Evento {
+  id          Int      @id @default(autoincrement())
+  nome        String
+  data        DateTime
+  tipo        String
+  local       String
+  faixaEtaria String
+  preco       Float
+  descricao   String
+}
