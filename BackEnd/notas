@@ -1,0 +1,31 @@
+Colocar projeto para rodar:
+- verificar node modules
+- verificar banco de dados (.env)
+  // DATABASE_URL="mysql://root:aluno@localhost:3306/litoral_mise"
+- npx prisma migrate dev --name init
+- npx prisma generate
+- node index.js
+
+Testar requisições:
+- http://localhost:3000/users
+- http://localhost:3000/eventos
+
+
+- POST (users)
+{
+  "nome": "Marcello",
+  "email": "marce@email.com",
+  "senha": "1456",
+  "telefone": "11999999989"
+} 
+
+- POST (eventos)
+{
+  "nome": "Festival de Música",
+  "data": "2025-07-10",
+  "tipo": "musical",
+  "local": "Praça Central",
+  "faixaEtaria": "Livre",
+  "preco": 0,
+  "descricao": "Grande festival ao ar livre com bandas locais"
+}
