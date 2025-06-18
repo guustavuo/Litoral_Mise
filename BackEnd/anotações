@@ -1,3 +1,31 @@
+Como conferir os dados?
+✔️MySQL Workbench
+
+Abra o MySQL Workbench.
+
+Conecte-se ao seu servidor MySQL local.
+
+No painel esquerdo, clique no seu banco de dados (ex.: litoral_mise).
+
+Expanda Tables.
+
+Clique com o direito na tabela → “Select Rows - Limit 1000”.
+
+✅ Vai ver todos os registros cadastrados pelo Thunder Client.
+
+✔️Prisma Studio
+Prisma também tem uma interface gráfica web para ver e editar os dados facilmente.
+
+No terminal, rode:
+
+"npx prisma studio"
+
+Ele vai abrir no navegador, por padrão:
+
+http://localhost:5555
+
+✅ Lá você pode ver, editar, deletar registros de User e Evento.
+
 Colocar projeto para rodar:
 - verificar node modules
 - verificar banco de dados (.env)
