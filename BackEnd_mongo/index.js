@@ -24,7 +24,7 @@ app.get('/evento-form', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'evento.html'));
 });
 
-app.listen(3001, () => {
+app.listen(3000, () => {
   console.log('Servidor rodando na porta 3000');
 });
 

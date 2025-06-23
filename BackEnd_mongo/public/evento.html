@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cadastro de Evento</title>
+</head>
+<body>
+  <h2>Cadastro de Evento Cultural</h2>
+  <form id="eventoForm">
+    <label>Nome: <input name="nome" required /></label><br />
+    <label>Data: <input name="data" type="date" required /></label><br />
+    <label>Tipo: <input name="tipo" required /></label><br />
+    <label>Local: <input name="local" required /></label><br />
+    <label>Faixa Etária: <input name="faixaEtaria" required /></label><br />
+    <label>Preço: <input name="preco" type="number" step="0.01" required /></label><br />
+    <label>Descrição: <textarea name="descricao" required></textarea></label><br />
+    <button type="submit">Cadastrar Evento</button>
+  </form>
+
+  <script>
+    document.getElementById("eventoForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const form = e.target;
+
+      const evento = {
+        nome: form.nome.value,
+        data: form.data.value,
+        tipo: form.tipo.value,
+        local: form.local.value,
+        faixaEtaria: form.faixaEtaria.value,
+        preco: parseFloat(form.preco.value),
+        descricao: form.descricao.value
+      };
+
+      try {
+        const res = await fetch("http://localhost:3000/eventos", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(evento)
+        });
+
+        if (res.ok) {
+          alert("Evento cadastrado com sucesso!");
+          form.reset();
+        } else {
+          const error = await res.json();
+          alert("Erro: " + (error.message || JSON.stringify(error)));
+        }
+      } catch (err) {
+        alert("Erro ao conectar com o servidor: " + err.message);
+      }
+    });
+  </script>
+</body>
+</html>
