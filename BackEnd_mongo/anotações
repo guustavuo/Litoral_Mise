@@ -80,6 +80,18 @@ Iniciar o servidor
 -   node index.js
 
 
+
+
+ATENÇÃO!!!!!!
+***se for usar o put, get por id ou delete usar não precisa colocar /id
+rota exemplo:
+http://localhost:3000/eventos/6858488fb1a69ccb6709086d
+
+
+
+
+
+
 TO DO:
 - trabalhar nos filtros
 - junção front end BIA com back end 

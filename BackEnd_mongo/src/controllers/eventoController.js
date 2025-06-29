@@ -16,7 +16,7 @@ exports.createEvento = async (req, res) => {
         descricao
       }
     });
-    res.status(201).json(novoEvento);
+    res.status(201).json("Evento cadastrado com sucesso!");
   } catch (error) {
     console.error('Erro ao criar evento:', error); // Mostra no terminal
     res.status(500).json({ error: error.message }); // Retorna mensagem real pro Thunder Client
@@ -115,5 +115,75 @@ exports.getEventos = async (req, res) => {
   } catch (error) {
     console.error('Erro ao buscar eventos com filtro:', error);
     res.status(500).json({ error: error.message });
+  }
+};
+
+// GET por nome
+exports.getEventoPorNome = async (req, res) => {
+  const { nome } = req.params;
+  try {
+    const evento = await prisma.evento.findFirst({
+      where: { nome: { equals: nome, mode: 'insensitive' } },
+    });
+    if (!evento) return res.status(404).json({ error: 'Evento não encontrado.' });
+    res.json(evento);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao buscar evento.' });
+  }
+};
+
+// Atualizar evento pelo nome
+exports.updateEventoPorNome = async (req, res) => {
+  const { nome } = req.params;
+  const { nome: novoNome, data, tipo, local, faixaEtaria, preco, descricao } = req.body;
+
+  try {
+    const eventoExistente = await prisma.evento.findFirst({
+      where: { nome: { equals: nome, mode: 'insensitive' } }
+    });
+
+    if (!eventoExistente) {
+      return res.status(404).json({ error: 'Evento não encontrado para atualização.' });
+    }
+
+    const eventoAtualizado = await prisma.evento.update({
+      where: { id: eventoExistente.id },
+      data: {
+        nome: novoNome,
+        data: new Date(data),
+        tipo,
+        local,
+        faixaEtaria,
+        preco: parseFloat(preco),
+        descricao
+      }
+    });
+
+    res.json(eventoAtualizado);
+  } catch (error) {
+    console.error('Erro ao atualizar evento por nome:', error);
+    res.status(500).json({ error: 'Erro ao atualizar evento.' });
+  }
+};
+
+// DELETE por nome
+exports.deleteEventoPorNome = async (req, res) => {
+  const { nome } = req.params;
+
+  try {
+    const evento = await prisma.evento.findFirst({
+      where: { nome: { equals: nome, mode: 'insensitive' } },
+    });
+
+    if (!evento)
+      return res.status(404).json({ error: 'Evento não encontrado para exclusão.' });
+
+    await prisma.evento.delete({
+      where: { id: evento.id },
+    });
+
+    res.json({ mensagem: 'Evento deletado com sucesso.' });
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao deletar evento.' });
   }
 };
