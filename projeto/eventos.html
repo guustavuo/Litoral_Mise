@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato</title>
+  <link rel="stylesheet" href="form.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="eventos.css">
+</head>
+<body>
+  <nav>
+        <div class="nav-container">
+          <a href="assets/Logo.png"></a>
+            <a href="#" class="logo">Litoral mise-en-scène</a>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="eventos.html">Eventos</a></li>
+                <li><a href="#">Categorias</a></li>
+                <li><a href="#">Locais</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+  <div class="container">
+    <div class="content">
+      <div class="info-section">
+        <h4>📞 LIGUE PARA NÓS</h4>
+        <p>1 (234) 567-891<br>1 (234) 987-654</p>
+
+        <h4>📍 LOCALIZAÇÃO</h4>
+        <p>123 Street, St. Avenue, New York, NY 12345-0000</p>
+
+        <h4>⏰ HORÁRIO COMERCIAL</h4>
+        <p>Seg - Sex... 10h - 20h, Sáb, Dom... Fechado</p>
+      </div>
+      <div class="form-section">
+        <h2>Buscar eventos</h2>
+        
+          <form id="cor">
+        <div class="filtro-grid">
+        <div class="filtro-item">
+          <label for="cidade">Cidade</label>
+          <input type="text" id="cidade" placeholder="Digite a cidade">
+        </div>
+      
+        <div class="filtro-item">
+          <label for="tipo">Tipo de evento</label>
+          <select id="tipo">
+          <option value="">Selecione</option>
+          <option value="musica">Música</option>
+          <option value="teatro">Teatro</option>
+          <option value="cinema">Cinema</option>
+          <option value="esporte">Pintura</option>
+          <option value="esporte">Shows</option>
+          <option value="esporte">Dança</option>
+          </select>
+        </div>
+      
+        <div class="filtro-item">
+          <label for="data">Data do evento</label>
+          <input type="date" id="data">
+        </div>
+      
+        <div class="filtro-item">
+          <label for="entrada">Entrada</label>
+          <select id="entrada">
+          <option value="">Selecione</option>
+          <option value="gratis">Gratuita</option>
+          <option value="paga">Paga</option>
+          </select>
+        </div>
+      
+        <div class="filtro-item">
+          <label for="faixa">Faixa etária</label>
+          <select id="faixa">
+          <option value="">Selecione</option>
+          <option value="livre">Livre</option>
+          <option value="10+">10+</option>
+          <option value="14+">14+</option>
+          <option value="18+">18+</option>
+          </select>
+        </div>
+      
+        <div class="filtro-item">
+          <label for="modo">Presencial/Online</label>
+          <select id="modo">
+          <option value="">Selecione</option>
+          <option value="presencial">Presencial</option>
+          <option value="online">Online</option>
+          <option value="hibrido">Híbrido</option>
+          </select>
+        </div>
+        </div>
+      
+        <div class="filtro-footer">
+        <button type="submit">Buscar</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Litoral mise-en-scène</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="carrossel.css">
+    <link rel="stylesheet" href="form.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+          <a href="assets/Logo.png"></a>
+            <a href="#" class="logo">Litoral mise-en-scène</a>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="eventos.html">Eventos</a></li>
+                <li><a href="#">Categorias</a></li>
+                <li><a href="#">Locais</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="decoration-event"></div>
+
+    <div class="box-form">
+     <div class="filtro-container">
+      <div class="filtro-header">
+        <p class="p">📅 Buscar eventos</p>
+        <p class="p">Filtrar ▼</p>
+      </div>
+      
+      <form id="cor">
+        <div class="filtro-grid">
+        <div class="filtro-item">
+          <label for="cidade">Cidade</label>
+          <input type="text" id="cidade" placeholder="Digite a cidade">
+        </div>
+      
+        <div class="filtro-item">
+          <label for="tipo">Tipo de evento</label>
+          <select id="tipo">
+          <option value="">Selecione</option>
+          <option value="musica">Música</option>
+          <option value="teatro">Teatro</option>
+          <option value="cinema">Cinema</option>
+          <option value="esporte">Pintura</option>
+          <option value="esporte">Shows</option>
+          <option value="esporte">Dança</option>
+          </select>
+        </div>
+      
+        <div class="filtro-item">
+          <label for="data">Data do evento</label>
+          <input type="date" id="data">
+        </div>
+      
+        <div class="filtro-item">
+          <label for="entrada">Entrada</label>
+          <select id="entrada">
+          <option value="">Selecione</option>
+          <option value="gratis">Gratuita</option>
+          <option value="paga">Paga</option>
+          </select>
+        </div>
+      
+        <div class="filtro-item">
+          <label for="faixa">Faixa etária</label>
+          <select id="faixa">
+          <option value="">Selecione</option>
+          <option value="livre">Livre</option>
+          <option value="10+">10+</option>
+          <option value="14+">14+</option>
+          <option value="18+">18+</option>
+          </select>
+        </div>
+      
+        <div class="filtro-item">
+          <label for="modo">Presencial/Online</label>
+          <select id="modo">
+          <option value="">Selecione</option>
+          <option value="presencial">Presencial</option>
+          <option value="online">Online</option>
+          <option value="hibrido">Híbrido</option>
+          </select>
+        </div>
+        </div>
+      
+        <div class="filtro-footer">
+        <button type="submit">Buscar</button>
+        </div>
+      </form>
+      </div>
+      </div>
+</body>
+</html> -->

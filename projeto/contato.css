@@ -1,0 +1,140 @@
+ * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f0f0;
+    }
+
+    #icones-contato {
+      background-color: #acbec5;
+      width: 30px;
+      height: 30px;
+    }
+
+    .social-icons {
+      background-color: #acbec5;
+    }
+
+    .container {
+      display: flex;
+      min-height: 100vh;
+      flex-wrap: wrap;
+      background-color: #acbec5;
+      border-radius: 15px;
+      padding: 0px;
+      margin: 40px;
+    }
+
+    .left-panel {
+      background-color: #acbec5;
+      flex: 1 1 300px;
+      padding: 60px 40px;
+      color: #0d47a1;
+      /* border-radius: 15px; */
+    }
+
+    .left-panel h3 {
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      background-color: #acbec5;
+    }
+
+    .left-panel p {
+      margin-bottom: 40px;
+      line-height: 1.5;
+      font-size: 15px;
+      background-color: #acbec5;
+    }
+
+    .social-icons a {
+      margin-right: 15px;
+      font-size: 20px;
+      color: #0d47a1;
+      text-decoration: none;
+      background-color: #acbec5;
+    }
+
+    .footer {
+      margin-top: 50px;
+      font-size: 13px;
+      background-color: #acbec5;
+    }
+
+    form {
+        background-color: #1e3a70;
+    }
+
+    .right-panel {
+      background-color: #1e3a70;
+      flex: 1 1 400px;
+      padding: 60px 40px;
+      color: white;
+      /* border-radius: 15px; */
+    }
+
+    .right-panel h2 {
+      margin-bottom: 30px;
+      font-size: 30px;
+      font-weight: normal;
+      background-color: #1e3a70;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .right-panel input,
+    .right-panel textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #eeeeee;
+      font-size: 14px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .right-panel button {
+      padding: 10px 25px;
+      background-color: #6e8188;
+      border-radius: 5px;
+      box-shadow: none;
+      color: white;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: 0.3s;
+    }
+
+    .right-panel button:hover {
+      background-color: white;
+      color: #1e3a70;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .left-panel, .right-panel {
+        padding: 40px 20px;
+      }
+
+      .right-panel h2 {
+        font-size: 22px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .social-icons a {
+        font-size: 18px;
+        margin-right: 10px;
+      }
+
+      .right-panel h2 {
+        font-size: 20px;
+      }
+    }

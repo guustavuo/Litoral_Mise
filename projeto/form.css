@@ -1,0 +1,102 @@
+form #cor{
+  background-color: #fff; /* fundo branco */
+}
+
+.decoration-event {
+  display: flex;
+  background-color: #9aafc4;
+  width: 100%;
+  max-height: 300px;
+}
+
+.filtro-container {
+  background-color: #ffffff; /* fundo branco */
+  padding: 60px;
+  border-radius: 15px;
+  max-width: 1250px;
+  color: #000000; /* texto preto para melhor contraste */
+  font-family: 'HK Grotesk', sans-serif;
+  left: 50%;
+}
+
+.filtro-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 25px;
+  background-color: #ced4da;
+}
+
+select {
+  background-color: #d3d3d3; /* cinza claro */
+}
+
+.filtro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 70px;
+  background-color: #ffffff; /* fundo branco */
+}
+
+.filtro-item {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff; /* fundo branco */
+}
+
+.filtro-item label {
+  font-size: 15px;
+  margin-bottom: 5px;
+  background-color: #ffffff; /* fundo branco */
+}
+
+.filtro-item input,
+.filtro-item select {
+  background-color: #d3d3d3; /* caixas cinza */
+  border: none;
+  border-bottom: 1px solid #888;
+  padding: 6px 2px;
+  color: #000000; /* texto preto */
+  font-size: 12px;
+  outline: none;
+}
+
+.filtro-item input::placeholder {
+  color: #555555; /* placeholder cinza escuro */
+}
+
+.filtro-item select option {
+  color: black;
+}
+
+.filtro-footer {
+  padding-top: 30px;
+  text-align: right;
+  background-color: #fff; /* fundo branco */
+}
+
+.filtro-footer button {
+  padding: 7px 17px;
+  background-color: white;
+  color: #08242b;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.filtro-footer button:hover {
+  background-color: #ced4da;
+}
+
+.p {
+  background-color: #416D78;
+  font-family: 'HK Grotesk', sans-serif;
+}
+
+#cor {
+  background-color: #416D78;
+}

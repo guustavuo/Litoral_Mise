@@ -1,0 +1,188 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Litoral mise-en-scène</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="carrossel.css">
+    <link rel="stylesheet" href="form.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+          <a href="assets/Logo.png"></a>
+            <a href="#" class="logo">Litoral mise-en-scène</a>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="eventos.html">Eventos</a></li>
+                <li><a href="#">Categorias</a></li>
+                <li><a href="#">Locais</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Descubra os Melhores Eventos da Cidade</h1>
+            <p>Sua agenda cultural completa com shows, exposições, teatro, gastronomia e muito mais.</p>
+            <a href="#" class="btn">Explorar Eventos</a>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <h2 class="section-title">Próximos Eventos</h2>
+            
+            <div class="category-filters">
+                <button class="filter-btn active">Todos</button>
+                <button class="filter-btn">Música</button>
+                <button class="filter-btn">Arte</button>
+                <button class="filter-btn">Teatro</button>
+                <button class="filter-btn">Gastronomia</button>
+                <button class="filter-btn">Cinema</button>
+            </div>
+            
+            <div class="events-grid">
+                <div class="event-card">
+                    <div class="event-image" style="background-image: url('https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3')"></div>
+                    <div class="event-details">
+                        <div class="event-date">25 de Junho, 2025 • 20:00</div>
+                        <h3 class="event-title">Festival de Música</h3>
+                        <div class="event-location"><i class="fas fa-map-marker-alt"></i> Parque da Cidade</div>
+                        <a href="#" class="btn">Ver Detalhes</a>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-image" style="background-image: url('https://images.unsplash.com/photo-1513364776144-60967b0f800f')"></div>
+                    <div class="event-details">
+                        <div class="event-date">30 de Junho, 2025 • 19:30</div>
+                        <h3 class="event-title">Exposição de Arte Moderna</h3>
+                        <div class="event-location"><i class="fas fa-map-marker-alt"></i> Galeria Central</div>
+                        <a href="#" class="btn">Ver Detalhes</a>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-image" style="background-image: url('https://images.unsplash.com/photo-1603190287605-e6ade32fa852')"></div>
+                    <div class="event-details">
+                        <div class="event-date">2 de Julho, 2025 • 16:00</div>
+                        <h3 class="event-title">Festival Gastronômico</h3>
+                        <div class="event-location"><i class="fas fa-map-marker-alt"></i> Praça das Artes</div>
+                        <a href="#" class="btn">Ver Detalhes</a>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-image" style="background-image: url('https://images.unsplash.com/photo-1507676184212-d03ab07a01bf')"></div>
+                    <div class="event-details">
+                        <div class="event-date">5 de Julho, 2025 • 21:00</div>
+                        <h3 class="event-title">Show de Jazz</h3>
+                        <div class="event-location"><i class="fas fa-map-marker-alt"></i> Blue Note Club</div>
+                        <a href="#" class="btn">Ver Detalhes</a>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-image" style="background-image: url('https://images.unsplash.com/photo-1478720568477-152d9b164e26')"></div>
+                    <div class="event-details">
+                        <div class="event-date">10 de Julho, 2023 • 19:00</div>
+                        <h3 class="event-title">Peça de Teatro</h3>
+                        <div class="event-location"><i class="fas fa-map-marker-alt"></i> Teatro Municipal</div>
+                        <a href="#" class="btn">Ver Detalhes</a>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-image" style="background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1')"></div>
+                    <div class="event-details">
+                        <div class="event-date">15 de Julho, 2023 • 14:00</div>
+                        <h3 class="event-title">Festival de Cinema</h3>
+                        <div class="event-location"><i class="fas fa-map-marker-alt"></i> Cinemark Shopping</div>
+                        <a href="#" class="btn">Ver Detalhes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <!-- <h3>Eventos</h3><br> -->
+            <h2 class="section-title">Eventos por categoria</h2>
+        </div>
+        
+            <div class="carousel" id="carousel">
+              <div class="carousel-images" id="carousel-images">
+                
+                <div class="image-wrapper">
+                  <a href="teste.html">
+                    <img src="assets/Cinema.png" />
+                   </a>
+                </div>
+                  
+                <div class="image-wrapper">
+                  <a href="teste.html">
+                    <img src="assets/Teatro.png" />
+                  </a>
+                  </div>
+                  
+                <div class="image-wrapper">
+                  <a href="teste.html">
+                    <img src="assets/Musica.png" />
+                  </a>
+                  </div>
+                  
+                <div class="image-wrapper">
+                  <a href="teste.html">
+                    <img src="assets/Pintura.png" />
+                  </a>
+                 </div>
+                  
+                <div class="image-wrapper">
+                  <a href="teste.html">
+                    <img src="assets/Shows.png" />
+                  </a>
+                </div>
+                  
+                <div class="image-wrapper">
+                  <a href="teste.html">
+                    <img src="assets/Dança.png" />
+                  </a>
+                </div>
+
+              </div>
+              <!-- <button class="prev">❮</button>
+              <button class="next">❯</button> -->
+            </div>
+        
+        <section class="newsletter">
+            <div class="container">
+                <h2>Receba as Novidades</h2>
+                <p>Inscreva-se para receber informações sobre os próximos eventos.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Seu e-mail">
+                    <button type="submit">Inscrever</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>&copy; 2023 Agenda Cultural. Todos os direitos reservados.</p>
+        </div>
+    </div>
+
+    <script src="carrossel.js"></script>
+    <script src="second.js"></script>
+  
