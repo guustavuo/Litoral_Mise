@@ -1,12 +1,14 @@
 import React from 'react';
 import './index.css';
+import { Link } from 'react-router-dom'; // <-- Adicione isto
+
 
 function App() {
   return (
     <>
       <nav>
         <div className="nav-container">
-          <a href="#" className='logo'><img src="src/assets/LogoSite.png" alt="Logo" /></a>
+          <a href="#" className='logo'><img src="src/assets/logo_escura.png" alt="Logo" /></a>
           <a href="#" className="nome">Litoral mise-en-scène</a>
           <ul className="nav-links">
             <li><a href="#">Home</a></li>
@@ -32,6 +34,10 @@ function App() {
       <main>
         <div className="container">
           <h2 className="section-title">Próximos Eventos</h2>
+
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}>
+            <Link to="/cadastro" className="btn">+ Adicionar Evento</Link>
+          </div>
 
           <div className="category-filters">
             <button className="filter-btn active">Todos</button>
@@ -99,7 +105,7 @@ function App() {
           </div>
         </div>
 
-         <div className="box">
+        <div className="box">
           <h2 className="section-title">Eventos por categoria</h2>
         </div>
 

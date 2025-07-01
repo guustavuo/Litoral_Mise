@@ -30,7 +30,7 @@ body {
 nav {
   background-color: #CFEEF7;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  position: sticky;
+  /*position: sticky;*/
   top: 0;
   z-index: 100;
 }
@@ -45,11 +45,20 @@ nav {
   background-color: transparent;
 }
 
+.logo {
+  text-decoration: none;
+  color: inherit;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
 .logo img {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   background-color: #CFEEF7;
   object-fit: contain;
+  text-decoration: none;
 }
 
 .nome {
@@ -424,3 +433,63 @@ footer {
     background-color: #416D78;
   }
   
+
+  /*css páagina cadastroEventos*/
+  
+  .formulario-evento {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 600px;
+  margin: 0 auto 60px auto;
+}
+
+.formulario-evento label {
+  font-weight: bold;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+}
+
+.formulario-evento input,
+.formulario-evento textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+.formulario-evento .btn {
+  align-self: flex-start;
+  margin-top: 15px;
+  background-color: #416D78;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.formulario-evento .btn:hover {
+  background-color: #2f5058;
+}
+ 
+.section-title + .btn {
+  margin-left: auto;
+}
+
+.formulario-evento .btn {
+  padding: 10px 20px;
+  border: none;
+  background-color: #416D78;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+}
+
+.formulario-evento .btn:hover {
+  background-color: #2f5058;
+}
