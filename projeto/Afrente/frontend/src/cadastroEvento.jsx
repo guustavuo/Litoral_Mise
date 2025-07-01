@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './home/index.css';
 import { Link } from 'react-router-dom';
+import { API_BASE_URL } from './api';
 
 function CadastroEvento() {
   const [formData, setFormData] = useState({
@@ -17,20 +18,36 @@ function CadastroEvento() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Evento cadastrado:', formData);
-    alert("Evento cadastrado com sucesso!");
 
-    setFormData({
-      nome: '',
-      data: '',
-      tipo: '',
-      local: '',
-      faixaEtaria: '',
-      preco: '',
-      descricao: '',
-    });
+    try {
+      const response = await fetch(`${API_BASE_URL}/eventos`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || "Erro ao cadastrar evento");
+      }
+
+      alert("Evento cadastrado com sucesso!");
+      setFormData({
+        nome: '',
+        data: '',
+        tipo: '',
+        local: '',
+        faixaEtaria: '',
+        preco: '',
+        descricao: '',
+      });
+    } catch (error) {
+      alert("Erro ao cadastrar: " + error.message);
+    }
   };
 
   return (
@@ -98,7 +115,7 @@ function CadastroEvento() {
           </label>
 
           {/* BOTÕES ALINHADOS À DIREITA */}
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '20px', fontSize: '10px' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '20px' }}>
             <Link to="/" className="btn">← Voltar para Home</Link>
             <button type="submit" className="btn">Cadastrar Evento</button>
           </div>

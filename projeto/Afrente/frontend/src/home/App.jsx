@@ -1,9 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.css';
-import { Link } from 'react-router-dom'; // <-- Adicione isto
-
+import { Link } from 'react-router-dom';
+import { API_BASE_URL } from '../api';
 
 function App() {
+  const [eventos, setEventos] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/eventos`)
+      .then(res => res.json())
+      .then(data => setEventos(data))
+      .catch(err => console.error("Erro ao carregar eventos:", err));
+  }, []);
+
+  const deletarEvento = async (id) => {
+    const confirmar = window.confirm('Tem certeza que deseja deletar este evento?');
+    if (!confirmar) return;
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/eventos/${id}`, { method: 'DELETE' });
+      if (response.ok) {
+        alert('Evento deletado com sucesso.');
+        setEventos(eventos.filter(e => e.id !== id));
+      } else {
+        const erro = await response.json();
+        alert('Erro ao deletar: ' + erro.error);
+      }
+    } catch (error) {
+      alert('Erro ao deletar evento.');
+    }
+  };
+
   return (
     <>
       <nav>
@@ -49,59 +76,31 @@ function App() {
           </div>
 
           <div className="events-grid">
-            {[
-              {
-                date: "25 de Junho, 2025 • 20:00",
-                title: "Festival de Música",
-                location: "Parque da Cidade",
-                img: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3",
-              },
-              {
-                date: "30 de Junho, 2025 • 19:30",
-                title: "Exposição de Arte Moderna",
-                location: "Galeria Central",
-                img: "https://images.unsplash.com/photo-1513364776144-60967b0f800f",
-              },
-              {
-                date: "2 de Julho, 2025 • 16:00",
-                title: "Festival Gastronômico",
-                location: "Praça das Artes",
-                img: "https://images.unsplash.com/photo-1603190287605-e6ade32fa852",
-              },
-              {
-                date: "5 de Julho, 2025 • 21:00",
-                title: "Show de Jazz",
-                location: "Blue Note Club",
-                img: "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf",
-              },
-              {
-                date: "10 de Julho, 2023 • 19:00",
-                title: "Peça de Teatro",
-                location: "Teatro Municipal",
-                img: "https://images.unsplash.com/photo-1478720568477-152d9b164e26",
-              },
-              {
-                date: "15 de Julho, 2023 • 14:00",
-                title: "Festival de Cinema",
-                location: "Cinemark Shopping",
-                img: "https://images.unsplash.com/photo-1536440136628-849c177e76a1",
-              }
-            ].map((event, index) => (
-              <div className="event-card" key={index}>
-                <div
-                  className="event-image"
-                  style={{ backgroundImage: `url('${event.img}')` }}
-                ></div>
-                <div className="event-details">
-                  <div className="event-date">{event.date}</div>
-                  <h3 className="event-title">{event.title}</h3>
-                  <div className="event-location">
-                    <i className="fas fa-map-marker-alt"></i> {event.location}
+            {eventos.length === 0 ? (
+              <p>Nenhum evento encontrado.</p>
+            ) : (
+              eventos.map((event) => (
+                <div className="event-card" key={event.id}>
+                  <div
+                    className="event-image"
+                    style={{
+                      backgroundImage: `url('https://source.unsplash.com/400x250/?${event.tipo}')`
+                    }}
+                  ></div>
+                  <div className="event-details">
+                    <div className="event-date">{new Date(event.data).toLocaleString('pt-BR')}</div>
+                    <h3 className="event-title">{event.nome}</h3>
+                    <div className="event-location">
+                      <i className="fas fa-map-marker-alt"></i> {event.local}
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
+                      <Link to={`/editar/${event.id}`} className="btn">Editar</Link>
+                      <button className="btn" onClick={() => deletarEvento(event.id)}>Deletar</button>
+                    </div>
                   </div>
-                  <a href="#" className="btn">Ver Detalhes</a>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
 
@@ -111,8 +110,8 @@ function App() {
 
         <div className="carousel">
           <div className="carousel-images">
-            {["Cinema", "Teatro", "Musica", "Pintura", "Shows", "Dança"].map((cat) => (
-              <div className="image-wrapper">
+            {["Cinema", "Teatro", "Musica", "Pintura", "Shows", "Dança"].map((cat, index) => (
+              <div className="image-wrapper" key={index}>
                 <a href="teste.html">
                   <img src={`src/assets/${cat}.png`} alt={cat} />
                 </a>
@@ -120,7 +119,6 @@ function App() {
             ))}
           </div>
         </div>
-
 
         <section className="newsletter">
           <div className="container">

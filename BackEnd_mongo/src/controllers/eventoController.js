@@ -1,6 +1,10 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
+const cors = require('cors');
+app.use(cors());
+ 
+
 // Criar evento
 exports.createEvento = async (req, res) => {
   const { nome, data, tipo, local, faixaEtaria, preco, descricao } = req.body;
