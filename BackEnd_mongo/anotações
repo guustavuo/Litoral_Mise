@@ -87,6 +87,8 @@ ATENÇÃO!!!!!!
 rota exemplo:
 http://localhost:3000/eventos/6858488fb1a69ccb6709086d
 
+USAR!!!!!!!!!!!
+DATABASE_URL="mongodb+srv://aluno:litoral@litoralmise.md7orno.mongodb.net/litoralmise?retryWrites=true&w=majority&appName=LitoralMise"
 
 
 

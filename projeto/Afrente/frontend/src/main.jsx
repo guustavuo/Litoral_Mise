@@ -4,6 +4,7 @@ import './home/index.css'
 import App from './home/App.jsx'
 import MainRoutes from './mainRoutes.jsx';
 
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
      <MainRoutes />

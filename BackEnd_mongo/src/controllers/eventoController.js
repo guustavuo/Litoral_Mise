@@ -1,8 +1,5 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
-
-const cors = require('cors');
-app.use(cors());
  
 
 // Criar evento
@@ -86,41 +83,23 @@ exports.deleteEvento = async (req, res) => {
   }
 };
 
-exports.getEventos = async (req, res) => {
-  const { nome, tipo, faixaEtaria, local, precoMin, precoMax } = req.query;
-
-  const filtro = {};
-
-  if (nome) {
-    filtro.nome = { contains: nome, mode: 'insensitive' };
-  }
-  if (tipo) {
-    filtro.tipo = { equals: tipo, mode: 'insensitive' };
-  }
-  if (faixaEtaria) {
-    filtro.faixaEtaria = { equals: faixaEtaria, mode: 'insensitive' };
-  }
-  if (local) {
-    filtro.local = { contains: local, mode: 'insensitive' };
-  }
-  if (precoMin || precoMax) {
-    filtro.preco = {};
-    if (precoMin) filtro.preco.gte = parseFloat(precoMin);
-    if (precoMax) filtro.preco.lte = parseFloat(precoMax);
-  }
-
-  if (Object.keys(filtro).length === 0) {
-    return res.json([]); // retorna vazio se não passou filtro
-  }
+// Buscar eventos por tipo específico via parâmetro de rota
+exports.getEventosPorTipo = async (req, res) => {
+  const { tipo } = req.params;
 
   try {
-    const eventos = await prisma.evento.findMany({ where: filtro });
+    const eventos = await prisma.evento.findMany({
+      where: {
+        tipo: { equals: tipo, mode: 'insensitive' }
+      }
+    });
     res.json(eventos);
   } catch (error) {
-    console.error('Erro ao buscar eventos com filtro:', error);
+    console.error('Erro ao buscar eventos por tipo:', error);
     res.status(500).json({ error: error.message });
   }
 };
+
 
 // GET por nome
 exports.getEventoPorNome = async (req, res) => {

@@ -3,6 +3,10 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const userRoutes = require('./src/routes/userRoutes');
 const eventoRoutes = require('./src/routes/eventoRoutes');
+require('dotenv').config();
+
+const port = process.env.PORT || 3000;
+
 
 const app = express();
 
@@ -11,6 +15,8 @@ const cors = require('cors');
 app.use(cors());
 
 app.use(bodyParser.json());
+app.use(express.json());
+
 
 // Servir arquivos estáticos da pasta "public"
 app.use(express.static(path.join(__dirname, 'public')));

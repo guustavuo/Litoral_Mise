@@ -6,10 +6,12 @@ const eventoController = require('../controllers/eventoController');
 // Rotas de evento
 router.post('/eventos', eventoController.createEvento);
 router.get('/eventos', eventoController.getAllEventos);
-router.get('/eventos/:id', eventoController.getEventoById);
 router.put('/eventos/:id', eventoController.updateEvento);
 router.delete('/eventos/:id', eventoController.deleteEvento);
-router.get('/eventos', eventoController.getEventos);
+router.get('/eventos/:id', eventoController.getEventoById);
+router.get('/eventos/tipo/:tipo', eventoController.getEventosPorTipo);
+
+
 // Buscar evento pelo nome
 router.get('/eventos/nome/:nome', eventoController.getEventoPorNome);
 // Atualizar evento pelo nome

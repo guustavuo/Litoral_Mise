@@ -118,7 +118,10 @@ nav {
   margin: 0 auto;
   padding: 20px;
   background-color: transparent;
+  margin-top: 0;
+  margin-bottom: 0;
 }
+
 
 .container p {
   background-color: #333;
@@ -180,6 +183,14 @@ section {
   height: 200px;
   background-size: cover;
   background-position: center;
+}
+
+.event-details p {
+  background-color: transparent;
+  color: inherit;
+  min-height: auto;
+  margin-top: 10px;
+  font-weight: bold;
 }
 
 .event-details {
@@ -283,7 +294,7 @@ h1 {
 }
 
 main {
-  padding: 40px 0;
+  padding: 0px 0;
 }
 
 /* section {
@@ -492,4 +503,17 @@ footer {
 
 .formulario-evento .btn:hover {
   background-color: #2f5058;
+}
+
+.event-details p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 8px 0;
+  background-color:#CFEEF7 ;
+}
+
+.event-details strong{
+  color: #416D78;
+  font-weight: bold;
+  background-color: #CFEEF7;
 }
