@@ -1,0 +1,8 @@
+INICIAR FRONT END
+- npm i 
+- npm run dev
+
+INICIAR BACK END
+- npm i 
+- npx prisma generate
+- node index.js
