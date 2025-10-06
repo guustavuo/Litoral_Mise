@@ -1,0 +1,165 @@
+import { StyleSheet } from "react-native";
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#f9f9f9",
+  },
+
+  // HEADER
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "#dff6fa",
+    paddingHorizontal: 16,
+    paddingVertical: 20,
+    height: 80,
+  },
+  logo: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#0a3d62",
+  },
+  nav: {
+    flexDirection: "row",
+    gap: 12,
+  },
+  navItem: {
+    fontSize: 14,
+    color: "#333",
+  },
+
+  // HERO
+  hero: {
+    backgroundColor: "#1e272e",
+    padding: 30,
+    alignItems: "center",
+  },
+  heroTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#fff",
+    textAlign: "center",
+    marginBottom: 10,
+  },
+  heroSubtitle: {
+    fontSize: 14,
+    color: "#dcdcdc",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  heroButton: {
+    backgroundColor: "#0a3d62",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+  },
+  heroButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+
+  // SECTION
+  section: {
+    padding: 20,
+    backgroundColor: "#f4f4f4",
+  },
+  sectionHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#2d3436",
+  },
+  addButton: {
+    backgroundColor: "#0a3d62",
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 20,
+  },
+  addButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  eventCard: {
+    backgroundColor: "#fff",
+    padding: 16,
+    borderRadius: 10,
+    marginBottom: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 3,
+  },
+  eventTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#2d3436",
+  },
+  eventDate: {
+    fontSize: 14,
+    color: "#636e72",
+  },
+
+  // NEWSLETTER
+  newsletter: {
+    backgroundColor: "#1b3a57",
+    padding: 20,
+    alignItems: "center",
+  },
+  newsletterTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#fff",
+    marginBottom: 6,
+  },
+  newsletterSubtitle: {
+    fontSize: 14,
+    color: "#dcdcdc",
+    marginBottom: 12,
+    textAlign: "center",
+  },
+  newsletterForm: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    borderRadius: 20,
+    overflow: "hidden",
+    width: "100%",
+    maxWidth: 400,
+  },
+  input: {
+    flex: 1,
+    padding: 10,
+    fontSize: 14,
+    color: "#333",
+  },
+  subscribeButton: {
+    backgroundColor: "#0a3d62",
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 20,
+  },
+  subscribeButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+
+  // FOOTER
+  footer: {
+    backgroundColor: "#2f2f2f",
+    padding: 16,
+    alignItems: "center",
+  },
+  footerText: {
+    fontSize: 12,
+    color: "#dcdcdc",
+  },
+});
+
+export default styles;
