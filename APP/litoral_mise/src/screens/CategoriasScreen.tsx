@@ -7,9 +7,18 @@ import {
   Animated,
   Dimensions,
   Pressable,
+  Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styles from "../styles/homeStyles";
+
+// Import das mesmas imagens da HomeScreen
+import showDeRockImg from "../assets/show_de_rock.jpg";
+import feiraGastronomiaImg from "../assets/feira_de_gastronomia.jpg";
+import mostraCinemaImg from "../assets/mostra_de_cinema.jpg";
+import exposicaoArteImg from "../assets/exposicao_de_arte.jpg";
+import festivalPraiaImg from "../assets/festival_na_praia.jpg";
+import teatroInfantilImg from "../assets/teatro_infantil.jpg";
 
 export default function CategoriasScreen() {
   const navigation = useNavigation();
@@ -27,6 +36,56 @@ export default function CategoriasScreen() {
     "Cinema",
     "Religião",
   ];
+
+  const eventos = [
+    {
+      nome: "Show de Rock",
+      horario: "Sábado, 20h",
+      descricao: "Uma noite inesquecível com as melhores bandas locais e muito som ao vivo!",
+      image: showDeRockImg,
+      categoria: "Musical",
+    },
+    {
+      nome: "Feira de Gastronomia",
+      horario: "Domingo, 12h",
+      descricao: "Sabores regionais e pratos únicos da nossa região litorânea.",
+      image: feiraGastronomiaImg,
+      categoria: "Gastronomia",
+    },
+    {
+      nome: "Mostra de Cinema",
+      horario: "Sexta, 19h",
+      descricao: "Filmes independentes nacionais com exibições ao ar livre.",
+      image: mostraCinemaImg,
+      categoria: "Cinema",
+    },
+    {
+      nome: "Exposição de Arte",
+      horario: "Quinta, 10h às 18h",
+      descricao: "Obras inspiradas nas paisagens e na cultura do litoral.",
+      image: exposicaoArteImg,
+      categoria: "Arte",
+    },
+    {
+      nome: "Festival na Praia",
+      horario: "Sábado e Domingo, 14h",
+      descricao: "Música, gastronomia e esportes à beira-mar.",
+      image: festivalPraiaImg,
+      categoria: "Musical",
+    },
+    {
+      nome: "Teatro Infantil",
+      horario: "Domingo, 16h",
+      descricao: "Uma peça encantadora para toda a família.",
+      image: teatroInfantilImg,
+      categoria: "Teatro",
+    },
+  ];
+
+  const eventosFiltrados =
+    categoriaSelecionada === "Todos"
+      ? eventos
+      : eventos.filter((e) => e.categoria === categoriaSelecionada);
 
   const openMenu = () => {
     setMenuVisible(true);
@@ -46,19 +105,20 @@ export default function CategoriasScreen() {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: "#E8E6E1" }}>
       {/* HEADER */}
       <View style={styles.header}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Text style={styles.logo}>🌊 Litoral mise-en-scène</Text>
-        </View>
+        <Text style={styles.logo}>🌊 Litoral mise-en-scène</Text>
         <TouchableOpacity onPress={openMenu} style={styles.menuButton}>
           <Text style={styles.menuIcon}>☰</Text>
         </TouchableOpacity>
       </View>
 
       {/* CONTEÚDO */}
-      <ScrollView style={{ backgroundColor: "#E8E6E1" }}>
+      <ScrollView
+        contentContainerStyle={{ paddingBottom: 100 }}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={{ padding: 24, alignItems: "center" }}>
           <Text
             style={{
@@ -106,54 +166,58 @@ export default function CategoriasScreen() {
             ))}
           </View>
 
-          {/* EVENTOS (simulação visual) */}
-          <View
-            style={{
-              backgroundColor: "#3A3A3A",
-              width: "85%",
-              height: 120,
-              borderRadius: 12,
-              marginTop: 20,
-            }}
-          ></View>
-          <View
-            style={{
-              backgroundColor: "#3A3A3A",
-              width: "85%",
-              height: 120,
-              borderRadius: 12,
-              marginTop: 20,
-            }}
-          ></View>
-          <View
-            style={{
-              backgroundColor: "#3A3A3A",
-              width: "85%",
-              height: 120,
-              borderRadius: 12,
-              marginTop: 20,
-              marginBottom: 40,
-            }}
-          ></View>
-        </View>
-
-        {/* FOOTER */}
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>
-            © 2023 Agenda Cultural. Todos os direitos reservados.
-          </Text>
+          {/* EVENTOS COM IMAGENS */}
+          {eventosFiltrados.map((evento, index) => (
+            <TouchableOpacity
+              key={index}
+              style={[styles.eventCard, { flexDirection: "row", alignItems: "center" }]}
+              onPress={() => navigation.navigate("EventoDetalhes", { evento })}
+            >
+              <Image source={evento.image} style={styles.eventImage} />
+              <View style={styles.eventTextContainer}>
+                <Text style={styles.eventTitle}>{evento.nome}</Text>
+                <Text style={styles.eventDate}>{evento.horario}</Text>
+              </View>
+            </TouchableOpacity>
+          ))}
         </View>
       </ScrollView>
 
-      {/* MENU LATERAL */}
+      {/* FOOTER FIXO */}
+      <View
+        style={{
+          backgroundColor: "#2F3E46",
+          paddingVertical: 10,
+          alignItems: "center",
+          justifyContent: "center",
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+        }}
+      >
+        <Text
+          style={{
+            color: "#fff",
+            fontSize: 12,
+            textAlign: "center",
+          }}
+        >
+          © 2025 Litoral mise-en-scène. Todos os direitos reservados.
+        </Text>
+      </View>
+
+      {/* MENU LATERAL DIREITO */}
       {menuVisible && (
-        <Pressable style={styles.menuOverlay} onPress={closeMenu}>
+        <View style={styles.overlay}>
+          <Pressable style={{ flex: 1 }} onPress={closeMenu} />
           <Animated.View
-            style={[
-              styles.menuContainer,
-              { transform: [{ translateX: slideAnim }] },
-            ]}
+            style={[styles.sideMenuRight, { transform: [{ translateX: slideAnim }] }]}
           >
+            <View style={styles.menuHeader}>
+              <Text style={styles.menuAppTitle}>🌊 Litoral mise-en-scène</Text>
+            </View>
+
             <TouchableOpacity
               style={styles.menuItem}
               onPress={() => {
@@ -161,7 +225,7 @@ export default function CategoriasScreen() {
                 navigation.navigate("Home" as never);
               }}
             >
-              <Text>🏠 Home</Text>
+              <Text style={styles.menuText}>🏠 Home</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -171,7 +235,7 @@ export default function CategoriasScreen() {
                 navigation.navigate("Categorias" as never);
               }}
             >
-              <Text>🎭 Categorias</Text>
+              <Text style={styles.menuText}>🎭 Categorias</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -181,10 +245,10 @@ export default function CategoriasScreen() {
                 navigation.navigate("Cadastro" as never);
               }}
             >
-              <Text>📝 Cadastro</Text>
+              <Text style={styles.menuText}>📝 Cadastro</Text>
             </TouchableOpacity>
           </Animated.View>
-        </Pressable>
+        </View>
       )}
     </View>
   );

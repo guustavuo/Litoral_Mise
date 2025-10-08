@@ -13,9 +13,9 @@ export default function EventoDetalhesScreen() {
       contentContainerStyle={{ paddingBottom: 40 }}
     >
       {/* IMAGEM DO EVENTO */}
-      {evento.imageUrl && (
+      {evento.image && (
         <Image
-          source={{ uri: evento.imageUrl }}
+          source={evento.image}
           style={{
             width: "100%",
             height: 240,

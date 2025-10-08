@@ -162,15 +162,20 @@ export default function CadastroScreen() {
         </View>
       </ScrollView>
 
-      {/* MENU LATERAL */}
+      {/* MENU LATERAL (DIREITO) */}
       {menuVisible && (
-        <Pressable style={styles.menuOverlay} onPress={closeMenu}>
+        <View style={styles.overlay}>
+          <Pressable style={{ flex: 1 }} onPress={closeMenu} />
           <Animated.View
             style={[
-              styles.menuContainer,
+              styles.sideMenuRight,
               { transform: [{ translateX: slideAnim }] },
             ]}
           >
+            <View style={styles.menuHeader}>
+              <Text style={styles.menuAppTitle}>🌊 Litoral mise-en-scène</Text>
+            </View>
+
             <TouchableOpacity
               style={styles.menuItem}
               onPress={() => {
@@ -178,7 +183,7 @@ export default function CadastroScreen() {
                 navigation.navigate("Home" as never);
               }}
             >
-              <Text>🏠 Home</Text>
+              <Text style={styles.menuText}>🏠 Home</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -188,7 +193,7 @@ export default function CadastroScreen() {
                 navigation.navigate("Categorias" as never);
               }}
             >
-              <Text>🎭 Categorias</Text>
+              <Text style={styles.menuText}>🎭 Categorias</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -198,10 +203,10 @@ export default function CadastroScreen() {
                 navigation.navigate("Cadastro" as never);
               }}
             >
-              <Text>📝 Cadastro</Text>
+              <Text style={styles.menuText}>📝 Cadastro</Text>
             </TouchableOpacity>
           </Animated.View>
-        </Pressable>
+        </View>
       )}
     </View>
   );

@@ -13,6 +13,14 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import styles from "../styles/homeStyles";
 
+// Import das imagens locais
+import showDeRockImg from "../assets/show_de_rock.jpg";
+import feiraGastronomiaImg from "../assets/feira_de_gastronomia.jpg";
+import mostraCinemaImg from "../assets/mostra_de_cinema.jpg";
+import exposicaoArteImg from "../assets/exposicao_de_arte.jpg";
+import festivalPraiaImg from "../assets/festival_na_praia.jpg";
+import teatroInfantilImg from "../assets/teatro_infantil.jpg";
+
 export default function HomeScreen() {
   const navigation = useNavigation();
   const [menuVisible, setMenuVisible] = useState(false);
@@ -35,28 +43,48 @@ export default function HomeScreen() {
     }).start(() => setMenuVisible(false));
   };
 
-  // --- EVENTOS EXEMPLO ---
   const eventos = [
     {
       nome: "Show de Rock",
       horario: "Sábado, 20h",
       descricao:
         "Uma noite inesquecível com as melhores bandas locais e muito som ao vivo!",
-      imageUrl: "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2",
+      image: showDeRockImg,
     },
     {
       nome: "Feira de Gastronomia",
       horario: "Domingo, 12h",
       descricao:
         "Sabores regionais, experiências culinárias e pratos únicos da nossa região litorânea.",
-      imageUrl: "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
+      image: feiraGastronomiaImg,
     },
     {
       nome: "Mostra de Cinema",
       horario: "Sexta, 19h",
       descricao:
         "Uma seleção de filmes independentes nacionais com exibições ao ar livre.",
-      imageUrl: "https://images.unsplash.com/photo-1505685296765-3a2736de412f",
+      image: mostraCinemaImg,
+    },
+    {
+      nome: "Exposição de Arte",
+      horario: "Quinta, 10h às 18h",
+      descricao:
+        "Artistas locais apresentam obras inspiradas nas paisagens e na cultura do litoral.",
+      image: exposicaoArteImg,
+    },
+    {
+      nome: "Festival na Praia",
+      horario: "Sábado e Domingo, a partir das 14h",
+      descricao:
+        "Música, gastronomia e esportes à beira-mar em um fim de semana inesquecível.",
+      image: festivalPraiaImg,
+    },
+    {
+      nome: "Teatro Infantil",
+      horario: "Domingo, 16h",
+      descricao:
+        "Uma peça encantadora para toda a família, com muita música e diversão.",
+      image: teatroInfantilImg,
     },
   ];
 
@@ -82,7 +110,7 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </View>
 
-       {/* SEÇÃO DE EVENTOS */}
+        {/* SEÇÃO DE EVENTOS */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Próximos Eventos</Text>
@@ -91,34 +119,17 @@ export default function HomeScreen() {
           {eventos.map((evento, index) => (
             <TouchableOpacity
               key={index}
-              style={[styles.eventCard, { padding: 0, overflow: "hidden" }]}
+              style={[styles.eventCard, { flexDirection: "row", alignItems: "center" }]}
               onPress={() => navigation.navigate("EventoDetalhes", { evento })}
             >
-              <Image
-                source={{ uri: evento.imageUrl }}
-                style={{
-                  width: "100%",
-                  height: 150,
-                }}
-                resizeMode="cover"
-              />
-              <View style={{ padding: 12 }}>
-                <Text
-                  style={{
-                    fontSize: 16,
-                    fontWeight: "bold",
-                    color: "#2d3436",
-                    marginBottom: 4,
-                  }}
-                >
-                  {evento.nome}
-                </Text>
-                <Text style={{ fontSize: 14, color: "#636e72" }}>{evento.horario}</Text>
+              <Image source={evento.image} style={styles.eventImage} />
+              <View style={styles.eventTextContainer}>
+                <Text style={styles.eventTitle}>{evento.nome}</Text>
+                <Text style={styles.eventDate}>{evento.horario}</Text>
               </View>
             </TouchableOpacity>
           ))}
         </View>
-
 
         {/* NEWSLETTER */}
         <View style={styles.newsletter}>
@@ -146,12 +157,20 @@ export default function HomeScreen() {
         </View>
       </ScrollView>
 
-      {/* MENU ANIMADO */}
+      {/* MENU LATERAL */}
       {menuVisible && (
-        <Pressable style={styles.menuOverlay} onPress={closeMenu}>
+        <View style={styles.overlay}>
+          <Pressable style={{ flex: 1 }} onPress={closeMenu} />
           <Animated.View
-            style={[styles.menuContainer, { transform: [{ translateX: slideAnim }] }]}
+            style={[
+              styles.sideMenuRight,
+              { transform: [{ translateX: slideAnim }] },
+            ]}
           >
+            <View style={styles.menuHeader}>
+              <Text style={styles.menuAppTitle}>🌊 Litoral mise-en-scène</Text>
+            </View>
+
             <TouchableOpacity
               style={styles.menuItem}
               onPress={() => {
@@ -159,7 +178,7 @@ export default function HomeScreen() {
                 navigation.navigate("Home" as never);
               }}
             >
-              <Text>🏠 Home</Text>
+              <Text style={styles.menuText}>🏠 Home</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -169,7 +188,7 @@ export default function HomeScreen() {
                 navigation.navigate("Categorias" as never);
               }}
             >
-              <Text>🎭 Categorias</Text>
+              <Text style={styles.menuText}>🎭 Categorias</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -179,10 +198,10 @@ export default function HomeScreen() {
                 navigation.navigate("Cadastro" as never);
               }}
             >
-              <Text>📝 Cadastro</Text>
+              <Text style={styles.menuText}>📝 Cadastro</Text>
             </TouchableOpacity>
           </Animated.View>
-        </Pressable>
+        </View>
       )}
     </View>
   );
