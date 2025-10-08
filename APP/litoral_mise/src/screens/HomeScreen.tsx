@@ -9,6 +9,7 @@ import {
   Dimensions,
   Pressable,
   Image,
+  ImageBackground,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styles from "../styles/homeStyles";
@@ -20,6 +21,7 @@ import mostraCinemaImg from "../assets/mostra_de_cinema.jpg";
 import exposicaoArteImg from "../assets/exposicao_de_arte.jpg";
 import festivalPraiaImg from "../assets/festival_na_praia.jpg";
 import teatroInfantilImg from "../assets/teatro_infantil.jpg";
+import fundoImg from "../assets/fundo.jpg"; // 👈 nova imagem de fundo
 
 export default function HomeScreen() {
   const navigation = useNavigation();
@@ -47,43 +49,37 @@ export default function HomeScreen() {
     {
       nome: "Show de Rock",
       horario: "Sábado, 20h",
-      descricao:
-        "Uma noite inesquecível com as melhores bandas locais e muito som ao vivo!",
+      descricao: "Uma noite inesquecível com as melhores bandas locais e muito som ao vivo!",
       image: showDeRockImg,
     },
     {
       nome: "Feira de Gastronomia",
       horario: "Domingo, 12h",
-      descricao:
-        "Sabores regionais, experiências culinárias e pratos únicos da nossa região litorânea.",
+      descricao: "Sabores regionais e pratos únicos da nossa região litorânea.",
       image: feiraGastronomiaImg,
     },
     {
       nome: "Mostra de Cinema",
       horario: "Sexta, 19h",
-      descricao:
-        "Uma seleção de filmes independentes nacionais com exibições ao ar livre.",
+      descricao: "Filmes independentes nacionais com exibições ao ar livre.",
       image: mostraCinemaImg,
     },
     {
       nome: "Exposição de Arte",
       horario: "Quinta, 10h às 18h",
-      descricao:
-        "Artistas locais apresentam obras inspiradas nas paisagens e na cultura do litoral.",
+      descricao: "Obras inspiradas nas paisagens e na cultura do litoral.",
       image: exposicaoArteImg,
     },
     {
       nome: "Festival na Praia",
-      horario: "Sábado e Domingo, a partir das 14h",
-      descricao:
-        "Música, gastronomia e esportes à beira-mar em um fim de semana inesquecível.",
+      horario: "Sábado e Domingo, 14h",
+      descricao: "Música, gastronomia e esportes à beira-mar.",
       image: festivalPraiaImg,
     },
     {
       nome: "Teatro Infantil",
       horario: "Domingo, 16h",
-      descricao:
-        "Uma peça encantadora para toda a família, com muita música e diversão.",
+      descricao: "Uma peça encantadora para toda a família.",
       image: teatroInfantilImg,
     },
   ];
@@ -100,7 +96,8 @@ export default function HomeScreen() {
 
       {/* CONTEÚDO */}
       <ScrollView style={styles.container}>
-        <View style={styles.hero}>
+        {/* HERO COM IMAGEM DE FUNDO */}
+        <ImageBackground source={fundoImg} style={styles.hero} imageStyle={{ opacity: 0.5 }}>
           <Text style={styles.heroTitle}>Descubra os Melhores Eventos da Cidade</Text>
           <Text style={styles.heroSubtitle}>
             Sua agenda cultural completa com shows, exposições, teatro, gastronomia e muito mais.
@@ -108,7 +105,7 @@ export default function HomeScreen() {
           <TouchableOpacity style={styles.heroButton}>
             <Text style={styles.heroButtonText}>Explorar Eventos</Text>
           </TouchableOpacity>
-        </View>
+        </ImageBackground>
 
         {/* SEÇÃO DE EVENTOS */}
         <View style={styles.section}>
@@ -131,6 +128,7 @@ export default function HomeScreen() {
           ))}
         </View>
 
+
         {/* NEWSLETTER */}
         <View style={styles.newsletter}>
           <Text style={styles.newsletterTitle}>Receba as Novidades</Text>
@@ -148,6 +146,7 @@ export default function HomeScreen() {
             </TouchableOpacity>
           </View>
         </View>
+
 
         {/* FOOTER */}
         <View style={styles.footer}>
@@ -206,3 +205,9 @@ export default function HomeScreen() {
     </View>
   );
 }
+
+
+
+
+
+

@@ -39,7 +39,7 @@ export default function CategoriasScreen() {
 
   const eventos = [
     {
-      nome: "Show de Rock",
+      nome: "Show de Rock            ",
       horario: "Sábado, 20h",
       descricao: "Uma noite inesquecível com as melhores bandas locais e muito som ao vivo!",
       image: showDeRockImg,
@@ -53,28 +53,28 @@ export default function CategoriasScreen() {
       categoria: "Gastronomia",
     },
     {
-      nome: "Mostra de Cinema",
+      nome: "Mostra de Cinema      ",
       horario: "Sexta, 19h",
       descricao: "Filmes independentes nacionais com exibições ao ar livre.",
       image: mostraCinemaImg,
       categoria: "Cinema",
     },
     {
-      nome: "Exposição de Arte",
+      nome: "Exposição de Arte       ",
       horario: "Quinta, 10h às 18h",
       descricao: "Obras inspiradas nas paisagens e na cultura do litoral.",
       image: exposicaoArteImg,
       categoria: "Arte",
     },
     {
-      nome: "Festival na Praia",
+      nome: "Festival na Praia           ",
       horario: "Sábado e Domingo, 14h",
       descricao: "Música, gastronomia e esportes à beira-mar.",
       image: festivalPraiaImg,
       categoria: "Musical",
     },
     {
-      nome: "Teatro Infantil",
+      nome: "Teatro Infantil               ",
       horario: "Domingo, 16h",
       descricao: "Uma peça encantadora para toda a família.",
       image: teatroInfantilImg,

@@ -32,9 +32,11 @@ const styles = StyleSheet.create({
 
   // HERO
   hero: {
-    backgroundColor: "#1e272e",
-    padding: 30,
-    alignItems: "center",
+    backgroundColor: "#1C1C1C",
+  padding: 32,
+  alignItems: "center",
+  justifyContent: "center",
+  height: 250, // ou ajuste conforme o tamanho da sua imagem
   },
   heroTitle: {
     fontSize: 20,
