@@ -8,6 +8,7 @@ import {
   Animated,
   Dimensions,
   Pressable,
+  Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styles from "../styles/homeStyles";
@@ -34,6 +35,31 @@ export default function HomeScreen() {
     }).start(() => setMenuVisible(false));
   };
 
+  // --- EVENTOS EXEMPLO ---
+  const eventos = [
+    {
+      nome: "Show de Rock",
+      horario: "Sábado, 20h",
+      descricao:
+        "Uma noite inesquecível com as melhores bandas locais e muito som ao vivo!",
+      imageUrl: "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2",
+    },
+    {
+      nome: "Feira de Gastronomia",
+      horario: "Domingo, 12h",
+      descricao:
+        "Sabores regionais, experiências culinárias e pratos únicos da nossa região litorânea.",
+      imageUrl: "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
+    },
+    {
+      nome: "Mostra de Cinema",
+      horario: "Sexta, 19h",
+      descricao:
+        "Uma seleção de filmes independentes nacionais com exibições ao ar livre.",
+      imageUrl: "https://images.unsplash.com/photo-1505685296765-3a2736de412f",
+    },
+  ];
+
   return (
     <View style={{ flex: 1 }}>
       {/* HEADER */}
@@ -56,25 +82,45 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </View>
 
+       {/* SEÇÃO DE EVENTOS */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Próximos Eventos</Text>
-            <TouchableOpacity style={styles.addButton}>
-              <Text style={styles.addButtonText}>+ Adicionar Evento</Text>
-            </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={styles.eventCard}>
-            <Text style={styles.eventTitle}>Show de Rock</Text>
-            <Text style={styles.eventDate}>Sábado, 20h</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.eventCard}>
-            <Text style={styles.eventTitle}>Feira de Gastronomia</Text>
-            <Text style={styles.eventDate}>Domingo, 12h</Text>
-          </TouchableOpacity>
+          {eventos.map((evento, index) => (
+            <TouchableOpacity
+              key={index}
+              style={[styles.eventCard, { padding: 0, overflow: "hidden" }]}
+              onPress={() => navigation.navigate("EventoDetalhes", { evento })}
+            >
+              <Image
+                source={{ uri: evento.imageUrl }}
+                style={{
+                  width: "100%",
+                  height: 150,
+                }}
+                resizeMode="cover"
+              />
+              <View style={{ padding: 12 }}>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontWeight: "bold",
+                    color: "#2d3436",
+                    marginBottom: 4,
+                  }}
+                >
+                  {evento.nome}
+                </Text>
+                <Text style={{ fontSize: 14, color: "#636e72" }}>{evento.horario}</Text>
+              </View>
+            </TouchableOpacity>
+          ))}
         </View>
 
+
+        {/* NEWSLETTER */}
         <View style={styles.newsletter}>
           <Text style={styles.newsletterTitle}>Receba as Novidades</Text>
           <Text style={styles.newsletterSubtitle}>
@@ -92,8 +138,11 @@ export default function HomeScreen() {
           </View>
         </View>
 
+        {/* FOOTER */}
         <View style={styles.footer}>
-          <Text style={styles.footerText}>© 2023 Agenda Cultural. Todos os direitos reservados.</Text>
+          <Text style={styles.footerText}>
+            © 2025 Litoral mise-en-scène. Todos os direitos reservados.
+          </Text>
         </View>
       </ScrollView>
 
@@ -101,10 +150,7 @@ export default function HomeScreen() {
       {menuVisible && (
         <Pressable style={styles.menuOverlay} onPress={closeMenu}>
           <Animated.View
-            style={[
-              styles.menuContainer,
-              { transform: [{ translateX: slideAnim }] },
-            ]}
+            style={[styles.menuContainer, { transform: [{ translateX: slideAnim }] }]}
           >
             <TouchableOpacity
               style={styles.menuItem}

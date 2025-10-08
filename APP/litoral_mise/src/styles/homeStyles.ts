@@ -95,6 +95,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 3,
+    flexDirection: "row",
+    alignItems: "center",
   },
   eventTitle: {
     fontSize: 16,
@@ -221,6 +223,17 @@ const styles = StyleSheet.create({
   menuText: {
     color: "#fff",
     fontSize: 16,
+  },
+
+  // ESTILOS ADICIONAIS PARA A LISTA DE EVENTOS
+  eventImage: {
+    width: 70,
+    height: 70,
+    borderRadius: 10,
+    marginRight: 12,
+  },
+  eventTextContainer: {
+    flex: 1,
   },
 
   
