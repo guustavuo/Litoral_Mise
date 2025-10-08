@@ -160,6 +160,54 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#dcdcdc",
   },
+
+      // MENU LATERAL (direita)
+  overlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(0,0,0,0.5)",
+  },
+  sideMenuRight: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    width: "70%",
+    backgroundColor: "#004d73",
+    paddingTop: 60,
+    paddingHorizontal: 20,
+  },
+  menuHeader: {
+    alignItems: "center",
+    marginBottom: 40,
+  },
+  menuAppTitle: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  menuItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 15,
+    borderBottomColor: "rgba(255,255,255,0.2)",
+    borderBottomWidth: 1,
+  },
+  menuIcon: {
+    fontSize: 18,
+    marginRight: 12,
+    color: "#fff",
+  },
+  menuText: {
+    color: "#fff",
+    fontSize: 16,
+  },
+
+  
+
 });
 
 export default styles;
