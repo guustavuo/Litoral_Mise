@@ -6,28 +6,28 @@ const styles = StyleSheet.create({
     backgroundColor: "#f9f9f9",
   },
 
-  // HEADER
+    // HEADER
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#dff6fa",
-    paddingHorizontal: 16,
-    paddingVertical: 20,
-    height: 80,
+    justifyContent: "center", // centraliza verticalmente
+    alignItems: "center", // centraliza horizontalmente
+    backgroundColor: "#0a3d62", // mesma cor do menu inferior
+    paddingVertical: 24,
+    height: 90,
+    shadowColor: "#000",
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 8, // sombra no Android
   },
   logo: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#0a3d62",
-  },
-  nav: {
-    flexDirection: "row",
-    gap: 12,
-  },
-  navItem: {
-    fontSize: 14,
-    color: "#333",
+    fontSize: 22,
+    color: "#ffffff",
+    fontWeight: "700",
+    letterSpacing: 1.2,
+    textShadowColor: "rgba(0, 0, 0, 0.3)",
+    textShadowOffset: { width: 1, height: 2 },
+    textShadowRadius: 4,
+    fontFamily: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif", // estilo artístico padrão (pode trocar abaixo)
   },
 
   // HERO
@@ -238,7 +238,43 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  
+  // abaixo de tudo (antes do export default styles;)
+  // MENU INFERIOR FIXO (visual vibrante e moderno)
+bottomBar: {
+  position: "absolute",
+  bottom: 10,
+  left: 20,
+  right: 20,
+  flexDirection: "row",
+  justifyContent: "space-around",
+  alignItems: "center",
+  backgroundColor: "#0a3d62", // azul-escuro principal
+  borderRadius: 30,
+  paddingVertical: 12,
+  elevation: 10,
+  shadowColor: "#000",
+  shadowOpacity: 0.2,
+  shadowRadius: 8,
+  shadowOffset: { width: 0, height: 5 },
+},
+bottomBarButton: {
+  alignItems: "center",
+  justifyContent: "center",
+},
+bottomBarText: {
+  fontSize: 12,
+  fontWeight: "600",
+  color: "#fff", // texto branco para contraste
+  marginTop: 4,
+},
+bottomBarIconActive: {
+  color: "#6FE7DD", // azul piscina vibrante (ícone ativo)
+},
+bottomBarIconInactive: {
+  color: "#dcdcdc", // ícones neutros
+},
+
+
 
 });
 

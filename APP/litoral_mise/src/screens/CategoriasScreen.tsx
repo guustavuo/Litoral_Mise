@@ -4,13 +4,11 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
-  Animated,
-  Dimensions,
-  Pressable,
   Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styles from "../styles/homeStyles";
+import { Ionicons } from "@expo/vector-icons";
 
 // Import das mesmas imagens da HomeScreen
 import showDeRockImg from "../assets/show_de_rock.jpg";
@@ -22,8 +20,6 @@ import teatroInfantilImg from "../assets/teatro_infantil.jpg";
 
 export default function CategoriasScreen() {
   const navigation = useNavigation();
-  const [menuVisible, setMenuVisible] = useState(false);
-  const slideAnim = useState(new Animated.Value(Dimensions.get("window").width))[0];
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("Todos");
 
   const categorias = [
@@ -37,9 +33,10 @@ export default function CategoriasScreen() {
     "Religião",
   ];
 
+  // Mesmo array de eventos da HomeScreen (com categoria para filtrar)
   const eventos = [
     {
-      nome: "Show de Rock            ",
+      nome: "Show de Rock",
       horario: "Sábado, 20h",
       descricao: "Uma noite inesquecível com as melhores bandas locais e muito som ao vivo!",
       image: showDeRockImg,
@@ -53,28 +50,28 @@ export default function CategoriasScreen() {
       categoria: "Gastronomia",
     },
     {
-      nome: "Mostra de Cinema      ",
+      nome: "Mostra de Cinema",
       horario: "Sexta, 19h",
       descricao: "Filmes independentes nacionais com exibições ao ar livre.",
       image: mostraCinemaImg,
       categoria: "Cinema",
     },
     {
-      nome: "Exposição de Arte       ",
+      nome: "Exposição de Arte",
       horario: "Quinta, 10h às 18h",
       descricao: "Obras inspiradas nas paisagens e na cultura do litoral.",
       image: exposicaoArteImg,
       categoria: "Arte",
     },
     {
-      nome: "Festival na Praia           ",
+      nome: "Festival na Praia",
       horario: "Sábado e Domingo, 14h",
       descricao: "Música, gastronomia e esportes à beira-mar.",
       image: festivalPraiaImg,
       categoria: "Musical",
     },
     {
-      nome: "Teatro Infantil               ",
+      nome: "Teatro Infantil",
       horario: "Domingo, 16h",
       descricao: "Uma peça encantadora para toda a família.",
       image: teatroInfantilImg,
@@ -87,79 +84,34 @@ export default function CategoriasScreen() {
       ? eventos
       : eventos.filter((e) => e.categoria === categoriaSelecionada);
 
-  const openMenu = () => {
-    setMenuVisible(true);
-    Animated.timing(slideAnim, {
-      toValue: 0,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const closeMenu = () => {
-    Animated.timing(slideAnim, {
-      toValue: Dimensions.get("window").width,
-      duration: 300,
-      useNativeDriver: true,
-    }).start(() => setMenuVisible(false));
-  };
-
   return (
-    <View style={{ flex: 1, backgroundColor: "#E8E6E1" }}>
-      {/* HEADER */}
+    <View style={{ flex: 1 }}>
+      {/* HEADER (sem hambúrguer) */}
       <View style={styles.header}>
         <Text style={styles.logo}>🌊 Litoral mise-en-scène</Text>
-        <TouchableOpacity onPress={openMenu} style={styles.menuButton}>
-          <Text style={styles.menuIcon}>☰</Text>
-        </TouchableOpacity>
       </View>
 
-      {/* CONTEÚDO */}
-      <ScrollView
-        contentContainerStyle={{ paddingBottom: 100 }}
-        showsVerticalScrollIndicator={false}
-      >
+      <ScrollView contentContainerStyle={{ paddingBottom: 120 }} style={{ backgroundColor: "#E8E6E1" }}>
         <View style={{ padding: 24, alignItems: "center" }}>
-          <Text
-            style={{
-              fontSize: 26,
-              fontWeight: "600",
-              color: "#2F3E46",
-              marginBottom: 20,
-            }}
-          >
+          <Text style={{ fontSize: 26, fontWeight: "600", color: "#2F3E46", marginBottom: 20 }}>
             Eventos por categoria
           </Text>
 
           {/* BOTÕES DE CATEGORIAS */}
-          <View
-            style={{
-              flexDirection: "row",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              gap: 10,
-              marginBottom: 20,
-            }}
-          >
+          <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "center", gap: 10, marginBottom: 20 }}>
             {categorias.map((cat) => (
               <TouchableOpacity
                 key={cat}
                 onPress={() => setCategoriaSelecionada(cat)}
                 style={{
-                  backgroundColor:
-                    categoriaSelecionada === cat ? "#2F3E46" : "#fff",
+                  backgroundColor: categoriaSelecionada === cat ? "#2F3E46" : "#fff",
                   borderRadius: 20,
                   paddingVertical: 8,
                   paddingHorizontal: 16,
+                  margin: 6,
                 }}
               >
-                <Text
-                  style={{
-                    color:
-                      categoriaSelecionada === cat ? "#fff" : "#2F3E46",
-                    fontWeight: "600",
-                  }}
-                >
+                <Text style={{ color: categoriaSelecionada === cat ? "#fff" : "#2F3E46", fontWeight: "600" }}>
                   {cat}
                 </Text>
               </TouchableOpacity>
@@ -171,7 +123,7 @@ export default function CategoriasScreen() {
             <TouchableOpacity
               key={index}
               style={[styles.eventCard, { flexDirection: "row", alignItems: "center" }]}
-              onPress={() => navigation.navigate("EventoDetalhes", { evento })}
+              onPress={() => navigation.navigate("EventoDetalhes" as never, { evento } as never)}
             >
               <Image source={evento.image} style={styles.eventImage} />
               <View style={styles.eventTextContainer}>
@@ -181,75 +133,39 @@ export default function CategoriasScreen() {
             </TouchableOpacity>
           ))}
         </View>
+
+        {/* FOOTER */}
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>© 2025 Litoral mise-en-scène. Todos os direitos reservados.</Text>
+        </View>
       </ScrollView>
 
-      {/* FOOTER FIXO */}
-      <View
-        style={{
-          backgroundColor: "#2F3E46",
-          paddingVertical: 10,
-          alignItems: "center",
-          justifyContent: "center",
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-        }}
-      >
-        <Text
-          style={{
-            color: "#fff",
-            fontSize: 12,
-            textAlign: "center",
-          }}
-        >
-          © 2025 Litoral mise-en-scène. Todos os direitos reservados.
-        </Text>
-      </View>
+      {/* MENU INFERIOR FIXO */}
+<View style={styles.bottomBar}>
+  <TouchableOpacity
+    style={styles.bottomBarButton}
+    onPress={() => navigation.navigate("Home" as never)}
+  >
+    <Ionicons name="home-outline" size={22} style={styles.bottomBarIconInactive} />
+    <Text style={styles.bottomBarText}>Home</Text>
+  </TouchableOpacity>
 
-      {/* MENU LATERAL DIREITO */}
-      {menuVisible && (
-        <View style={styles.overlay}>
-          <Pressable style={{ flex: 1 }} onPress={closeMenu} />
-          <Animated.View
-            style={[styles.sideMenuRight, { transform: [{ translateX: slideAnim }] }]}
-          >
-            <View style={styles.menuHeader}>
-              <Text style={styles.menuAppTitle}>🌊 Litoral mise-en-scène</Text>
-            </View>
+  <TouchableOpacity
+    style={styles.bottomBarButton}
+    onPress={() => navigation.navigate("Categorias" as never)}
+  >
+    <Ionicons name="grid-outline" size={22} style={styles.bottomBarIconInactive} />
+    <Text style={styles.bottomBarText}>Categorias</Text>
+  </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.menuItem}
-              onPress={() => {
-                closeMenu();
-                navigation.navigate("Home" as never);
-              }}
-            >
-              <Text style={styles.menuText}>🏠 Home</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.menuItem}
-              onPress={() => {
-                closeMenu();
-                navigation.navigate("Categorias" as never);
-              }}
-            >
-              <Text style={styles.menuText}>🎭 Categorias</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.menuItem}
-              onPress={() => {
-                closeMenu();
-                navigation.navigate("Cadastro" as never);
-              }}
-            >
-              <Text style={styles.menuText}>📝 Cadastro</Text>
-            </TouchableOpacity>
-          </Animated.View>
-        </View>
-      )}
+  <TouchableOpacity
+    style={styles.bottomBarButton}
+    onPress={() => navigation.navigate("Cadastro" as never)}
+  >
+    <Ionicons name="add-circle-outline" size={24} style={styles.bottomBarIconActive} />
+    <Text style={styles.bottomBarText}>Cadastro</Text>
+  </TouchableOpacity>
+</View>
     </View>
   );
 }

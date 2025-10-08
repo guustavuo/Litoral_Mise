@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styles from "../styles/homeStyles";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function CadastroScreen() {
   const navigation = useNavigation();
@@ -47,9 +48,7 @@ export default function CadastroScreen() {
       {/* HEADER */}
       <View style={styles.header}>
         <Text style={styles.logo}>🌊 Litoral mise-en-scène</Text>
-        <TouchableOpacity onPress={openMenu} style={styles.menuButton}>
-          <Text style={styles.menuIcon}>☰</Text>
-        </TouchableOpacity>
+        
       </View>
 
       {/* CONTEÚDO */}
@@ -162,52 +161,32 @@ export default function CadastroScreen() {
         </View>
       </ScrollView>
 
-      {/* MENU LATERAL (DIREITO) */}
-      {menuVisible && (
-        <View style={styles.overlay}>
-          <Pressable style={{ flex: 1 }} onPress={closeMenu} />
-          <Animated.View
-            style={[
-              styles.sideMenuRight,
-              { transform: [{ translateX: slideAnim }] },
-            ]}
-          >
-            <View style={styles.menuHeader}>
-              <Text style={styles.menuAppTitle}>🌊 Litoral mise-en-scène</Text>
-            </View>
+            {/* MENU INFERIOR FIXO */}
+      <View style={styles.bottomBar}>
+        <TouchableOpacity
+          style={styles.bottomBarButton}
+          onPress={() => navigation.navigate("Home" as never)}
+        >
+          <Ionicons name="home-outline" size={22} style={styles.bottomBarIconInactive} />
+          <Text style={styles.bottomBarText}>Home</Text>
+        </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.menuItem}
-              onPress={() => {
-                closeMenu();
-                navigation.navigate("Home" as never);
-              }}
-            >
-              <Text style={styles.menuText}>🏠 Home</Text>
-            </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.bottomBarButton}
+          onPress={() => navigation.navigate("Categorias" as never)}
+        >
+          <Ionicons name="grid-outline" size={22} style={styles.bottomBarIconInactive} />
+          <Text style={styles.bottomBarText}>Categorias</Text>
+        </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.menuItem}
-              onPress={() => {
-                closeMenu();
-                navigation.navigate("Categorias" as never);
-              }}
-            >
-              <Text style={styles.menuText}>🎭 Categorias</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.menuItem}
-              onPress={() => {
-                closeMenu();
-                navigation.navigate("Cadastro" as never);
-              }}
-            >
-              <Text style={styles.menuText}>📝 Cadastro</Text>
-            </TouchableOpacity>
-          </Animated.View>
-        </View>
-      )}
+        <TouchableOpacity
+          style={styles.bottomBarButton}
+          onPress={() => navigation.navigate("Cadastro" as never)}
+        >
+          <Ionicons name="add-circle-outline" size={24} style={styles.bottomBarIconActive} />
+          <Text style={styles.bottomBarText}>Cadastro</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

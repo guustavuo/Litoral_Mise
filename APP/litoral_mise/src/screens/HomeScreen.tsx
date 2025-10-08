@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
   ScrollView,
   TouchableOpacity,
   TextInput,
-  Animated,
-  Dimensions,
-  Pressable,
   Image,
   ImageBackground,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styles from "../styles/homeStyles";
+import { Ionicons } from "@expo/vector-icons";
 
 // Import das imagens locais
 import showDeRockImg from "../assets/show_de_rock.jpg";
@@ -21,47 +19,31 @@ import mostraCinemaImg from "../assets/mostra_de_cinema.jpg";
 import exposicaoArteImg from "../assets/exposicao_de_arte.jpg";
 import festivalPraiaImg from "../assets/festival_na_praia.jpg";
 import teatroInfantilImg from "../assets/teatro_infantil.jpg";
-import fundoImg from "../assets/fundo.jpg"; // 👈 nova imagem de fundo
+import fundoImg from "../assets/fundo.jpg"; // imagem de fundo (já estava no seu projeto)
 
 export default function HomeScreen() {
   const navigation = useNavigation();
-  const [menuVisible, setMenuVisible] = useState(false);
-  const slideAnim = useState(new Animated.Value(Dimensions.get("window").width))[0];
-
-  const openMenu = () => {
-    setMenuVisible(true);
-    Animated.timing(slideAnim, {
-      toValue: 0,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const closeMenu = () => {
-    Animated.timing(slideAnim, {
-      toValue: Dimensions.get("window").width,
-      duration: 300,
-      useNativeDriver: true,
-    }).start(() => setMenuVisible(false));
-  };
 
   const eventos = [
     {
       nome: "Show de Rock",
       horario: "Sábado, 20h",
-      descricao: "Uma noite inesquecível com as melhores bandas locais e muito som ao vivo!",
+      descricao:
+        "Uma noite inesquecível com as melhores bandas locais e muito som ao vivo!",
       image: showDeRockImg,
     },
     {
       nome: "Feira de Gastronomia",
       horario: "Domingo, 12h",
-      descricao: "Sabores regionais e pratos únicos da nossa região litorânea.",
+      descricao:
+        "Sabores regionais e pratos únicos da nossa região litorânea.",
       image: feiraGastronomiaImg,
     },
     {
       nome: "Mostra de Cinema",
       horario: "Sexta, 19h",
-      descricao: "Filmes independentes nacionais com exibições ao ar livre.",
+      descricao:
+        "Filmes independentes nacionais com exibições ao ar livre.",
       image: mostraCinemaImg,
     },
     {
@@ -86,18 +68,22 @@ export default function HomeScreen() {
 
   return (
     <View style={{ flex: 1 }}>
-      {/* HEADER */}
+       {/* HEADER (centralizado e estilizado) */}
       <View style={styles.header}>
         <Text style={styles.logo}>🌊 Litoral mise-en-scène</Text>
-        <TouchableOpacity onPress={openMenu} style={styles.menuButton}>
-          <Text style={styles.menuIcon}>☰</Text>
-        </TouchableOpacity>
       </View>
 
       {/* CONTEÚDO */}
-      <ScrollView style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={{ paddingBottom: 120 }} // espaço para o menu inferior
+      >
         {/* HERO COM IMAGEM DE FUNDO */}
-        <ImageBackground source={fundoImg} style={styles.hero} imageStyle={{ opacity: 0.5 }}>
+        <ImageBackground
+          source={fundoImg}
+          style={styles.hero}
+          imageStyle={{ opacity: 0.5 }}
+        >
           <Text style={styles.heroTitle}>Descubra os Melhores Eventos da Cidade</Text>
           <Text style={styles.heroSubtitle}>
             Sua agenda cultural completa com shows, exposições, teatro, gastronomia e muito mais.
@@ -117,7 +103,7 @@ export default function HomeScreen() {
             <TouchableOpacity
               key={index}
               style={[styles.eventCard, { flexDirection: "row", alignItems: "center" }]}
-              onPress={() => navigation.navigate("EventoDetalhes", { evento })}
+              onPress={() => navigation.navigate("EventoDetalhes" as never, { evento } as never)}
             >
               <Image source={evento.image} style={styles.eventImage} />
               <View style={styles.eventTextContainer}>
@@ -128,7 +114,6 @@ export default function HomeScreen() {
           ))}
         </View>
 
-
         {/* NEWSLETTER */}
         <View style={styles.newsletter}>
           <Text style={styles.newsletterTitle}>Receba as Novidades</Text>
@@ -136,78 +121,45 @@ export default function HomeScreen() {
             Inscreva-se para receber informações sobre os próximos eventos.
           </Text>
           <View style={styles.newsletterForm}>
-            <TextInput
-              style={styles.input}
-              placeholder="Seu e-mail"
-              placeholderTextColor="#aaa"
-            />
+            <TextInput style={styles.input} placeholder="Seu e-mail" placeholderTextColor="#aaa" />
             <TouchableOpacity style={styles.subscribeButton}>
               <Text style={styles.subscribeButtonText}>Inscrever</Text>
             </TouchableOpacity>
           </View>
         </View>
 
-
         {/* FOOTER */}
         <View style={styles.footer}>
-          <Text style={styles.footerText}>
-            © 2025 Litoral mise-en-scène. Todos os direitos reservados.
-          </Text>
+          <Text style={styles.footerText}>© 2025 Litoral mise-en-scène. Todos os direitos reservados.</Text>
         </View>
       </ScrollView>
 
-      {/* MENU LATERAL */}
-      {menuVisible && (
-        <View style={styles.overlay}>
-          <Pressable style={{ flex: 1 }} onPress={closeMenu} />
-          <Animated.View
-            style={[
-              styles.sideMenuRight,
-              { transform: [{ translateX: slideAnim }] },
-            ]}
-          >
-            <View style={styles.menuHeader}>
-              <Text style={styles.menuAppTitle}>🌊 Litoral mise-en-scène</Text>
-            </View>
+            {/* MENU INFERIOR FIXO */}
+      <View style={styles.bottomBar}>
+        <TouchableOpacity
+          style={styles.bottomBarButton}
+          onPress={() => navigation.navigate("Home" as never)}
+        >
+          <Ionicons name="home-outline" size={22} style={styles.bottomBarIconInactive} />
+          <Text style={styles.bottomBarText}>Home</Text>
+        </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.menuItem}
-              onPress={() => {
-                closeMenu();
-                navigation.navigate("Home" as never);
-              }}
-            >
-              <Text style={styles.menuText}>🏠 Home</Text>
-            </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.bottomBarButton}
+          onPress={() => navigation.navigate("Categorias" as never)}
+        >
+          <Ionicons name="grid-outline" size={22} style={styles.bottomBarIconInactive} />
+          <Text style={styles.bottomBarText}>Categorias</Text>
+        </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.menuItem}
-              onPress={() => {
-                closeMenu();
-                navigation.navigate("Categorias" as never);
-              }}
-            >
-              <Text style={styles.menuText}>🎭 Categorias</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.menuItem}
-              onPress={() => {
-                closeMenu();
-                navigation.navigate("Cadastro" as never);
-              }}
-            >
-              <Text style={styles.menuText}>📝 Cadastro</Text>
-            </TouchableOpacity>
-          </Animated.View>
-        </View>
-      )}
+        <TouchableOpacity
+          style={styles.bottomBarButton}
+          onPress={() => navigation.navigate("Cadastro" as never)}
+        >
+          <Ionicons name="add-circle-outline" size={24} style={styles.bottomBarIconActive} />
+          <Text style={styles.bottomBarText}>Cadastro</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
-
-
-
-
-
-
