@@ -8,51 +8,39 @@ import {
   Animated,
   Dimensions,
   Pressable,
-  Image,
 } from "react-native";
-import styles from "../styles/homeStyles";
 import { useNavigation } from "@react-navigation/native";
-
-const { width } = Dimensions.get("window");
+import styles from "../styles/homeStyles";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
   const [menuVisible, setMenuVisible] = useState(false);
-  const [slideAnim] = useState(new Animated.Value(width * 0.7)); // começa fora da tela à direita
+  const slideAnim = useState(new Animated.Value(Dimensions.get("window").width))[0];
 
-  const toggleMenu = () => {
-    if (menuVisible) {
-      Animated.timing(slideAnim, {
-        toValue: width * 0.7,
-        duration: 250,
-        useNativeDriver: true,
-      }).start(() => setMenuVisible(false));
-    } else {
-      setMenuVisible(true);
-      Animated.timing(slideAnim, {
-        toValue: 0,
-        duration: 250,
-        useNativeDriver: true,
-      }).start();
-    }
+  const openMenu = () => {
+    setMenuVisible(true);
+    Animated.timing(slideAnim, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const closeMenu = () => {
+    Animated.timing(slideAnim, {
+      toValue: Dimensions.get("window").width,
+      duration: 300,
+      useNativeDriver: true,
+    }).start(() => setMenuVisible(false));
   };
 
   return (
     <View style={{ flex: 1 }}>
       {/* HEADER */}
       <View style={styles.header}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Image
-            source={require("../assets/logo.png")}
-            style={{ width: 32, height: 32, marginRight: 8 }}
-          />
-          <Text style={styles.logo}>Litoral mise-en-scène</Text>
-        </View>
-        <TouchableOpacity
-          onPress={toggleMenu}
-          style={{ padding: 8, backgroundColor: "#c2edf3", borderRadius: 6 }}
-        >
-          <Text style={{ fontSize: 24, color: "#0a3d62" }}>☰</Text>
+        <Text style={styles.logo}>🌊 Litoral mise-en-scène</Text>
+        <TouchableOpacity onPress={openMenu} style={styles.menuButton}>
+          <Text style={styles.menuIcon}>☰</Text>
         </TouchableOpacity>
       </View>
 
@@ -68,7 +56,6 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </View>
 
-        {/* Eventos */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Próximos Eventos</Text>
@@ -88,13 +75,11 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </View>
 
-        {/* Newsletter */}
         <View style={styles.newsletter}>
           <Text style={styles.newsletterTitle}>Receba as Novidades</Text>
           <Text style={styles.newsletterSubtitle}>
             Inscreva-se para receber informações sobre os próximos eventos.
           </Text>
-
           <View style={styles.newsletterForm}>
             <TextInput
               style={styles.input}
@@ -107,64 +92,48 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {/* Footer */}
         <View style={styles.footer}>
-          <Text style={styles.footerText}>
-            © 2023 Agenda Cultural. Todos os direitos reservados.
-          </Text>
+          <Text style={styles.footerText}>© 2023 Agenda Cultural. Todos os direitos reservados.</Text>
         </View>
       </ScrollView>
 
-      {/* MENU LATERAL (DIREITA) */}
+      {/* MENU ANIMADO */}
       {menuVisible && (
-        <Pressable style={styles.overlay} onPress={toggleMenu}>
+        <Pressable style={styles.menuOverlay} onPress={closeMenu}>
           <Animated.View
             style={[
-              styles.sideMenuRight,
+              styles.menuContainer,
               { transform: [{ translateX: slideAnim }] },
             ]}
           >
-            {/* Logo e título dentro do menu */}
-            <View style={styles.menuHeader}>
-              <Image
-                source={require("../assets/logo.png")}
-                style={{ width: 48, height: 48, marginBottom: 8 }}
-              />
-              <Text style={styles.menuAppTitle}>Litoral mise-en-scène</Text>
-            </View>
-
-            {/* Opções */}
             <TouchableOpacity
               style={styles.menuItem}
               onPress={() => {
-                toggleMenu();
+                closeMenu();
                 navigation.navigate("Home" as never);
               }}
             >
-              <Text style={styles.menuIcon}>🏠</Text>
-              <Text style={styles.menuText}>Home</Text>
+              <Text>🏠 Home</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.menuItem}
               onPress={() => {
-                toggleMenu();
+                closeMenu();
                 navigation.navigate("Categorias" as never);
               }}
             >
-              <Text style={styles.menuIcon}>🎭</Text>
-              <Text style={styles.menuText}>Categorias</Text>
+              <Text>🎭 Categorias</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.menuItem}
               onPress={() => {
-                toggleMenu();
+                closeMenu();
                 navigation.navigate("Cadastro" as never);
               }}
             >
-              <Text style={styles.menuIcon}>📝</Text>
-              <Text style={styles.menuText}>Cadastro</Text>
+              <Text>📝 Cadastro</Text>
             </TouchableOpacity>
           </Animated.View>
         </Pressable>

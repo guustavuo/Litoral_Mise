@@ -162,6 +162,35 @@ const styles = StyleSheet.create({
   },
 
       // MENU LATERAL (direita)
+  menuButton: {
+    backgroundColor: "#c2edf3",
+    padding: 8,
+    borderRadius: 6,
+  },
+  menuIcon: {
+    fontSize: 24,
+    color: "#0a3d62",
+  },
+  menuOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0,0,0,0.5)",
+    justifyContent: "flex-start",
+    alignItems: "flex-end",
+  },
+  menuContainer: {
+    width: 200,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 12,
+    borderBottomLeftRadius: 12,
+    paddingVertical: 20,
+    marginTop: 80,
+  },
+  menuItem: {
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    borderBottomColor: "#ddd",
+    borderBottomWidth: 1,
+  },
   overlay: {
     position: "absolute",
     top: 0,
@@ -188,18 +217,6 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
-  },
-  menuItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 15,
-    borderBottomColor: "rgba(255,255,255,0.2)",
-    borderBottomWidth: 1,
-  },
-  menuIcon: {
-    fontSize: 18,
-    marginRight: 12,
-    color: "#fff",
   },
   menuText: {
     color: "#fff",

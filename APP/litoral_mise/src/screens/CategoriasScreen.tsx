@@ -7,33 +7,42 @@ import {
   Animated,
   Dimensions,
   Pressable,
-  Image,
 } from "react-native";
-import styles from "../styles/homeStyles";
 import { useNavigation } from "@react-navigation/native";
-
-const { width } = Dimensions.get("window");
+import styles from "../styles/homeStyles";
 
 export default function CategoriasScreen() {
   const navigation = useNavigation();
   const [menuVisible, setMenuVisible] = useState(false);
-  const [slideAnim] = useState(new Animated.Value(width * 0.7));
+  const slideAnim = useState(new Animated.Value(Dimensions.get("window").width))[0];
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState("Todos");
 
-  const toggleMenu = () => {
-    if (menuVisible) {
-      Animated.timing(slideAnim, {
-        toValue: width * 0.7,
-        duration: 250,
-        useNativeDriver: true,
-      }).start(() => setMenuVisible(false));
-    } else {
-      setMenuVisible(true);
-      Animated.timing(slideAnim, {
-        toValue: 0,
-        duration: 250,
-        useNativeDriver: true,
-      }).start();
-    }
+  const categorias = [
+    "Todos",
+    "Gastronomia",
+    "Musical",
+    "Concerto",
+    "Literatura",
+    "Teatro",
+    "Cinema",
+    "Religião",
+  ];
+
+  const openMenu = () => {
+    setMenuVisible(true);
+    Animated.timing(slideAnim, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const closeMenu = () => {
+    Animated.timing(slideAnim, {
+      toValue: Dimensions.get("window").width,
+      duration: 300,
+      useNativeDriver: true,
+    }).start(() => setMenuVisible(false));
   };
 
   return (
@@ -41,94 +50,138 @@ export default function CategoriasScreen() {
       {/* HEADER */}
       <View style={styles.header}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Image
-            source={require("../assets/logo.png")}
-            style={{ width: 32, height: 32, marginRight: 8 }}
-          />
-          <Text style={styles.logo}>Litoral mise-en-scène</Text>
+          <Text style={styles.logo}>🌊 Litoral mise-en-scène</Text>
         </View>
-        <TouchableOpacity
-          onPress={toggleMenu}
-          style={{ padding: 8, backgroundColor: "#c2edf3", borderRadius: 6 }}
-        >
-          <Text style={{ fontSize: 24, color: "#0a3d62" }}>☰</Text>
+        <TouchableOpacity onPress={openMenu} style={styles.menuButton}>
+          <Text style={styles.menuIcon}>☰</Text>
         </TouchableOpacity>
       </View>
 
       {/* CONTEÚDO */}
-      <ScrollView style={styles.container}>
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Categorias</Text>
-          <Text style={{ fontSize: 14, color: "#555", marginBottom: 12 }}>
-            Explore os tipos de eventos disponíveis:
+      <ScrollView style={{ backgroundColor: "#E8E6E1" }}>
+        <View style={{ padding: 24, alignItems: "center" }}>
+          <Text
+            style={{
+              fontSize: 26,
+              fontWeight: "600",
+              color: "#2F3E46",
+              marginBottom: 20,
+            }}
+          >
+            Eventos por categoria
           </Text>
 
-          <TouchableOpacity style={styles.eventCard}>
-            <Text style={styles.eventTitle}>🎶 Música</Text>
-          </TouchableOpacity>
+          {/* BOTÕES DE CATEGORIAS */}
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: 10,
+              marginBottom: 20,
+            }}
+          >
+            {categorias.map((cat) => (
+              <TouchableOpacity
+                key={cat}
+                onPress={() => setCategoriaSelecionada(cat)}
+                style={{
+                  backgroundColor:
+                    categoriaSelecionada === cat ? "#2F3E46" : "#fff",
+                  borderRadius: 20,
+                  paddingVertical: 8,
+                  paddingHorizontal: 16,
+                }}
+              >
+                <Text
+                  style={{
+                    color:
+                      categoriaSelecionada === cat ? "#fff" : "#2F3E46",
+                    fontWeight: "600",
+                  }}
+                >
+                  {cat}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
 
-          <TouchableOpacity style={styles.eventCard}>
-            <Text style={styles.eventTitle}>🎭 Teatro</Text>
-          </TouchableOpacity>
+          {/* EVENTOS (simulação visual) */}
+          <View
+            style={{
+              backgroundColor: "#3A3A3A",
+              width: "85%",
+              height: 120,
+              borderRadius: 12,
+              marginTop: 20,
+            }}
+          ></View>
+          <View
+            style={{
+              backgroundColor: "#3A3A3A",
+              width: "85%",
+              height: 120,
+              borderRadius: 12,
+              marginTop: 20,
+            }}
+          ></View>
+          <View
+            style={{
+              backgroundColor: "#3A3A3A",
+              width: "85%",
+              height: 120,
+              borderRadius: 12,
+              marginTop: 20,
+              marginBottom: 40,
+            }}
+          ></View>
+        </View>
 
-          <TouchableOpacity style={styles.eventCard}>
-            <Text style={styles.eventTitle}>🎨 Exposições</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.eventCard}>
-            <Text style={styles.eventTitle}>🍴 Gastronomia</Text>
-          </TouchableOpacity>
+        {/* FOOTER */}
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>
+            © 2023 Agenda Cultural. Todos os direitos reservados.
+          </Text>
         </View>
       </ScrollView>
 
       {/* MENU LATERAL */}
       {menuVisible && (
-        <Pressable style={styles.overlay} onPress={toggleMenu}>
+        <Pressable style={styles.menuOverlay} onPress={closeMenu}>
           <Animated.View
             style={[
-              styles.sideMenuRight,
+              styles.menuContainer,
               { transform: [{ translateX: slideAnim }] },
             ]}
           >
-            <View style={styles.menuHeader}>
-              <Image
-                source={require("../assets/logo.png")}
-                style={{ width: 48, height: 48, marginBottom: 8 }}
-              />
-              <Text style={styles.menuAppTitle}>Litoral mise-en-scène</Text>
-            </View>
-
             <TouchableOpacity
               style={styles.menuItem}
               onPress={() => {
-                toggleMenu();
+                closeMenu();
                 navigation.navigate("Home" as never);
               }}
             >
-              <Text style={styles.menuIcon}>🏠</Text>
-              <Text style={styles.menuText}>Home</Text>
+              <Text>🏠 Home</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.menuItem}
               onPress={() => {
-                toggleMenu();
+                closeMenu();
                 navigation.navigate("Categorias" as never);
               }}
             >
-              <Text style={styles.menuIcon}>🎭</Text>
-              <Text style={styles.menuText}>Categorias</Text>
+              <Text>🎭 Categorias</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.menuItem}
               onPress={() => {
-                toggleMenu();
+                closeMenu();
                 navigation.navigate("Cadastro" as never);
               }}
             >
-              <Text style={styles.menuIcon}>📝</Text>
-              <Text style={styles.menuText}>Cadastro</Text>
+              <Text>📝 Cadastro</Text>
             </TouchableOpacity>
           </Animated.View>
         </Pressable>
