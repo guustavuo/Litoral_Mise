@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
+  Animated
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styles from "../styles/homeStyles";
@@ -91,7 +92,14 @@ export default function CategoriasScreen() {
         <Text style={styles.logo}>🌊 Litoral mise-en-scène</Text>
       </View>
 
-      <ScrollView contentContainerStyle={{ paddingBottom: 120 }} style={{ backgroundColor: "#E8E6E1" }}>
+        <ScrollView
+          style={{ flex: 1, backgroundColor: "#E8E6E1" }}
+          contentContainerStyle={{
+            flexGrow: 1,
+            paddingBottom: 40, // menor, elimina o espaço branco
+          }}
+        >
+
         <View style={{ padding: 24, alignItems: "center" }}>
           <Text style={{ fontSize: 26, fontWeight: "600", color: "#2F3E46", marginBottom: 20 }}>
             Eventos por categoria
@@ -134,38 +142,56 @@ export default function CategoriasScreen() {
           ))}
         </View>
 
-        {/* FOOTER */}
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>© 2025 Litoral mise-en-scène. Todos os direitos reservados.</Text>
-        </View>
+        
       </ScrollView>
 
-      {/* MENU INFERIOR FIXO */}
-<View style={styles.bottomBar}>
-  <TouchableOpacity
-    style={styles.bottomBarButton}
-    onPress={() => navigation.navigate("Home" as never)}
-  >
-    <Ionicons name="home-outline" size={22} style={styles.bottomBarIconInactive} />
-    <Text style={styles.bottomBarText}>Home</Text>
-  </TouchableOpacity>
-
-  <TouchableOpacity
-    style={styles.bottomBarButton}
-    onPress={() => navigation.navigate("Categorias" as never)}
-  >
-    <Ionicons name="grid-outline" size={22} style={styles.bottomBarIconInactive} />
-    <Text style={styles.bottomBarText}>Categorias</Text>
-  </TouchableOpacity>
-
-  <TouchableOpacity
-    style={styles.bottomBarButton}
-    onPress={() => navigation.navigate("Cadastro" as never)}
-  >
-    <Ionicons name="add-circle-outline" size={24} style={styles.bottomBarIconActive} />
-    <Text style={styles.bottomBarText}>Cadastro</Text>
-  </TouchableOpacity>
-</View>
+      {/* MENU INFERIOR FIXO COM ANIMAÇÃO */}
+              <View style={styles.bottomBar}>
+                {[
+                  { name: "Home", icon: "home-outline", route: "Home" },
+                  { name: "Categorias", icon: "grid-outline", route: "Categorias" },
+                  { name: "Perfil", icon: "person-circle-outline", route: "Cadastro" },
+                ].map((item, index) => {
+                  const [scale] = React.useState(new Animated.Value(1));
+      
+                  const handlePressIn = () => {
+                    Animated.spring(scale, {
+                      toValue: 0.9,
+                      useNativeDriver: true,
+                    }).start();
+                  };
+      
+                  const handlePressOut = () => {
+                    Animated.spring(scale, {
+                      toValue: 1,
+                      friction: 3,
+                      useNativeDriver: true,
+                    }).start(() => navigation.navigate(item.route as never));
+                  };
+      
+                  return (
+                    <Animated.View key={index} style={{ transform: [{ scale }] }}>
+                      <TouchableOpacity
+                        activeOpacity={0.8}
+                        style={styles.bottomBarButton}
+                        onPressIn={handlePressIn}
+                        onPressOut={handlePressOut}
+                      >
+                        <Ionicons
+                          name={item.icon as any}
+                          size={item.name === "Perfil" ? 24 : 22}
+                          style={
+                            item.name === "Perfil"
+                              ? styles.bottomBarIconActive
+                              : styles.bottomBarIconInactive
+                          }
+                        />
+                        <Text style={styles.bottomBarText}>{item.name}</Text>
+                      </TouchableOpacity>
+                    </Animated.View>
+                  );
+                })}
+              </View>
     </View>
   );
 }

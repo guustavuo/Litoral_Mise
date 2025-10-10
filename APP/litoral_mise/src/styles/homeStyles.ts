@@ -240,40 +240,45 @@ const styles = StyleSheet.create({
 
   // abaixo de tudo (antes do export default styles;)
   // MENU INFERIOR FIXO (visual vibrante e moderno)
-bottomBar: {
-  position: "absolute",
-  bottom: 10,
-  left: 20,
-  right: 20,
-  flexDirection: "row",
-  justifyContent: "space-around",
-  alignItems: "center",
-  backgroundColor: "#0a3d62", // azul-escuro principal
-  borderRadius: 30,
-  paddingVertical: 12,
-  elevation: 10,
-  shadowColor: "#000",
-  shadowOpacity: 0.2,
-  shadowRadius: 8,
-  shadowOffset: { width: 0, height: 5 },
-},
-bottomBarButton: {
-  alignItems: "center",
-  justifyContent: "center",
-},
-bottomBarText: {
-  fontSize: 12,
-  fontWeight: "600",
-  color: "#fff", // texto branco para contraste
-  marginTop: 4,
-},
-bottomBarIconActive: {
-  color: "#6FE7DD", // azul piscina vibrante (ícone ativo)
-},
-bottomBarIconInactive: {
-  color: "#dcdcdc", // ícones neutros
-},
+  bottomBar: {
+    position: "absolute",
+    bottom: 10,
+    left: 20,
+    right: 20,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    backgroundColor: "#0a3d62", // azul-escuro principal
+    borderRadius: 30,
+    paddingVertical: 12,
+    elevation: 10,
+    shadowColor: "#000",
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 5 },
+  },
+  bottomBarButton: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  bottomBarText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#fff", // texto branco para contraste
+    marginTop: 4,
+  },
+  bottomBarIconActive: {
+    //color: "#6FE7DD", // azul piscina vibrante (ícone ativo)
+    color: "#dcdcdc",
+  },
+  bottomBarIconInactive: {
+    color: "#dcdcdc", // ícones neutros
+  },
 
+  scrollContainer: {
+    flexGrow: 1,
+    backgroundColor: "#f9f9f9",
+  },
 
 
 });
